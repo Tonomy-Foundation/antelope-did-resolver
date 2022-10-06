@@ -1,6 +1,6 @@
 import { DIDResolutionOptions, ParsedDID, Resolver, ServiceEndpoint, DIDResolutionMetadata, DIDDocumentMetadata } from "did-resolver"
 
-interface EosioAccountResponse {
+interface AntelopeAccountResponse {
     account_name: string,
     head_block_num: number,
     head_block_time: string,
@@ -27,8 +27,8 @@ interface EosioAccountResponse {
         parent: string,
         required_auth: {
             threshold: number,
-            keys: [EosioKeyType],
-            accounts: [EosioAccountPermission],
+            keys: [AntelopeKeyType],
+            accounts: [AntelopeAccountPermission],
             waits: [{
                 wait_sec: number,
                 weight: number
@@ -69,12 +69,12 @@ interface EosioAccountResponse {
     rex_info: any,
 }
 
-declare interface EosioKeyType {
+declare interface AntelopeKeyType {
     key: string,
     weight: number,
 }
 
-declare interface EosioAccountPermission {
+declare interface AntelopeAccountPermission {
     permission: {
         permission: string,
         actor: string

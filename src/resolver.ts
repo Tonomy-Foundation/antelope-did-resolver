@@ -7,8 +7,8 @@ import {
 } from 'did-resolver';
 import { JsonRpc } from 'eosjs';
 import {
-  EosioAccountPermission,
-  EosioAccountResponse,
+  AntelopeAccountPermission,
+  AntelopeAccountResponse,
   Entry,
   Registry,
   MethodId,
@@ -91,7 +91,7 @@ async function fetchAccount(
   did: string,
   parsed: ParsedDID,
   options: AntelopeDIDResolutionOptions
-): Promise<EosioAccountResponse | null> {
+): Promise<AntelopeAccountResponse | null> {
   const serviceType = 'LinkedDomains';
   const services = findServices(methodId.chain.service, serviceType);
 
@@ -175,7 +175,7 @@ function createAccountMethod(
   methodId: MethodId,
   i: number,
   did: string,
-  account: EosioAccountPermission
+  account: AntelopeAccountPermission
 ): VerificationMethod {
   const delegatedChain = baseId.slice(1, baseId.lastIndexOf(methodId.subject));
   const accountMethod = {
@@ -195,7 +195,7 @@ function createAccountMethod(
 function createDIDDocument(
   methodId: MethodId,
   did: string,
-  antelopeAccount: EosioAccountResponse
+  antelopeAccount: AntelopeAccountResponse
 ): DIDDocument {
   const verificationMethod: VerifiableConditionMethod[] = [];
   for (const permission of antelopeAccount.permissions) {
