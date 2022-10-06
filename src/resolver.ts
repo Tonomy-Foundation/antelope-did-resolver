@@ -16,13 +16,13 @@ import {
   VerifiableConditionMethod,
   Jwk,
   ExtensibleSchema,
-  EOSIODIDResolutionOptions,
+  AntelopeDIDResolutionOptions,
 } from './types';
 import { PublicKey } from 'eosjs/dist/eosjs-key-conversions';
 import { KeyType } from 'eosjs/dist/eosjs-numeric';
 import { ec } from 'elliptic';
 import { bnToBase64Url } from './utils';
-import eosioChainRegistry from './eosio-did-chain-registry.json';
+import antelopeChainRegistry from './antelope-did-chain-registry.json';
 
 const PATTERN_ACCOUNT_NAME = `([a-z1-5.]{0,12}[a-z1-5])`;
 const PATTERN_CHAIN_ID = `([A-Fa-f0-9]{64})`;
@@ -43,7 +43,7 @@ const REGEX_NAME_AND_SUBJECT = toRegExp(
 );
 
 export {
-  eosioChainRegistry,
+  antelopeChainRegistry,
   REGEX_ACCOUNT_NAME,
   REGEX_CHAIN_ID,
   REGEX_CHAIN_NAME,
@@ -90,7 +90,7 @@ async function fetchAccount(
   methodId: MethodId,
   did: string,
   parsed: ParsedDID,
-  options: EOSIODIDResolutionOptions
+  options: AntelopeDIDResolutionOptions
 ): Promise<EosioAccountResponse | null> {
   const serviceType = 'LinkedDomains';
   const services = findServices(methodId.chain.service, serviceType);
@@ -195,10 +195,10 @@ function createAccountMethod(
 function createDIDDocument(
   methodId: MethodId,
   did: string,
-  eosioAccount: EosioAccountResponse
+  antelopeAccount: EosioAccountResponse
 ): DIDDocument {
   const verificationMethod: VerifiableConditionMethod[] = [];
-  for (const permission of eosioAccount.permissions) {
+  for (const permission of antelopeAccount.permissions) {
     const baseId = did + '#' + permission.perm_name;
     const method: VerificationMethod = {
       id: baseId,
@@ -249,11 +249,11 @@ export async function resolve(
   did: string,
   parsed: ParsedDID,
   didResolver: Resolver,
-  options: EOSIODIDResolutionOptions
+  options: AntelopeDIDResolutionOptions
 ): Promise<DIDResolutionResult> {
   const registry: Registry = {
-    ...eosioChainRegistry,
-    ...options.eosioChainRegistry,
+    ...antelopeChainRegistry,
+    ...options.antelopeChainRegistry,
   };
 
   const methodId = checkDID(parsed, registry);
@@ -263,13 +263,13 @@ export async function resolve(
     return getResolutionError('invalidDid');
   }
 
-  const eosioAccount = await fetchAccount(methodId, did, parsed, options);
+  const antelopeAccount = await fetchAccount(methodId, did, parsed, options);
 
-  if (!eosioAccount) {
+  if (!antelopeAccount) {
     return getResolutionError('notFound');
   }
 
-  const didDoc = createDIDDocument(methodId, did, eosioAccount);
+  const didDoc = createDIDDocument(methodId, did, antelopeAccount);
 
   return {
     didResolutionMetadata: { contentType: 'application/did+ld+json' },

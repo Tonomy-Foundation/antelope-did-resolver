@@ -115,7 +115,7 @@ interface Entry {
     service: Service[]
 }
 
-export interface EOSIODIDResolutionOptions extends DIDResolutionOptions {
+export interface AntelopeDIDResolutionOptions extends DIDResolutionOptions {
     fetch?: any
 }
 
