@@ -34,7 +34,7 @@ It supports the proposed [Decentralized Identifiers](https://w3c-ccg.github.io/d
 
 It requires the `did-resolver` library, which is the primary interface for resolving DIDs.
 
-The DID specification can be found at [antelope-did-registry](https://github.com/Gimly-Blockchain/antelope-did-spec).
+The DID specification can be found at [antelope-did-registry](https://github.com/Tonomy-Foundation/antelope-did-spec).
 
 ## DID method
 
