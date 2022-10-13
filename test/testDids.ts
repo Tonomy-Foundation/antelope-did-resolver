@@ -1,6 +1,6 @@
 export const testDids = [
   {
-    did: 'did:eosio:eos:testnet:jungle:lioninjungle',
+    did: 'did:antelope:eos:testnet:jungle:lioninjungle',
     expectedResult: {
       didResolutionMetadata: { contentType: 'application/did+ld+json' },
       didDocument: {
@@ -8,18 +8,18 @@ export const testDids = [
           'https://www.w3.org/ns/did/v1',
           'https://w3c-ccg.github.io/verifiable-conditions/contexts/verifiable-conditions-2021-v1.json',
         ],
-        id: 'did:eosio:eos:testnet:jungle:lioninjungle',
+        id: 'did:antelope:eos:testnet:jungle:lioninjungle',
         verificationMethod: [
           {
-            id: 'did:eosio:eos:testnet:jungle:lioninjungle#active',
-            controller: 'did:eosio:eos:testnet:jungle:lioninjungle',
+            id: 'did:antelope:eos:testnet:jungle:lioninjungle#active',
+            controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:testnet:jungle:lioninjungle#active-0',
-                  controller: 'did:eosio:eos:testnet:jungle:lioninjungle',
+                  id: 'did:antelope:eos:testnet:jungle:lioninjungle#active-0',
+                  controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -34,19 +34,19 @@ export const testDids = [
               },
             ],
             relationshipParent: [
-              'did:eosio:eos:testnet:jungle:lioninjungle#owner',
+              'did:antelope:eos:testnet:jungle:lioninjungle#owner',
             ],
           },
           {
-            id: 'did:eosio:eos:testnet:jungle:lioninjungle#owner',
-            controller: 'did:eosio:eos:testnet:jungle:lioninjungle',
+            id: 'did:antelope:eos:testnet:jungle:lioninjungle#owner',
+            controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:testnet:jungle:lioninjungle#owner-0',
-                  controller: 'did:eosio:eos:testnet:jungle:lioninjungle',
+                  id: 'did:antelope:eos:testnet:jungle:lioninjungle#owner-0',
+                  controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -75,7 +75,7 @@ export const testDids = [
   },
   {
     did:
-      'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+      'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
     expectedResult: {
       didResolutionMetadata: {
         contentType: 'application/did+ld+json',
@@ -86,22 +86,22 @@ export const testDids = [
           'https://w3c-ccg.github.io/verifiable-conditions/contexts/verifiable-conditions-2021-v1.json',
         ],
         id:
-          'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+          'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
         verificationMethod: [
           {
             id:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
             controller:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active-0',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active-0',
                   controller:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -116,23 +116,23 @@ export const testDids = [
               },
             ],
             relationshipParent: [
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner',
             ],
           },
           {
             id:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#delphi',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#delphi',
             controller:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#delphi-0',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#delphi-0',
                   controller:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -147,23 +147,23 @@ export const testDids = [
               },
             ],
             relationshipParent: [
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
             ],
           },
           {
             id:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner',
             controller:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner-0',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner-0',
                   controller:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -180,18 +180,18 @@ export const testDids = [
           },
           {
             id:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#rng',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#rng',
             controller:
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#rng-0',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#rng-0',
                   controller:
-                    'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
+                    'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -206,7 +206,7 @@ export const testDids = [
               },
             ],
             relationshipParent: [
-              'did:eosio:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
+              'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
             ],
           },
         ],
@@ -222,7 +222,7 @@ export const testDids = [
     },
   },
   {
-    did: 'did:eosio:eos:eoscanadacom',
+    did: 'did:antelope:eos:eoscanadacom',
     expectedResult: {
       didResolutionMetadata: {
         contentType: 'application/did+ld+json',
@@ -232,108 +232,108 @@ export const testDids = [
           'https://www.w3.org/ns/did/v1',
           'https://w3c-ccg.github.io/verifiable-conditions/contexts/verifiable-conditions-2021-v1.json',
         ],
-        id: 'did:eosio:eos:eoscanadacom',
+        id: 'did:antelope:eos:eoscanadacom',
         verificationMethod: [
           {
-            id: 'did:eosio:eos:eoscanadacom#active',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#active',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 4,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaa#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-1',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-1',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaab#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaab#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-2',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-2',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaac#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-3',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-3',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaad#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaad#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-4',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-4',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaae#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaae#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-5',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-5',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaf#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-6',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-6',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaag#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaag#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-7',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-7',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaah#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaah#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#active-8',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#active-8',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaai#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaai#active',
                 },
                 weight: 1,
               },
             ],
-            relationshipParent: ['did:eosio:eos:eoscanadacom#owner'],
+            relationshipParent: ['did:antelope:eos:eoscanadacom#owner'],
           },
           {
-            id: 'did:eosio:eos:eoscanadacom#blacklistops',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#blacklistops',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#blacklistops-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#blacklistops-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -347,18 +347,18 @@ export const testDids = [
                 weight: 1,
               },
             ],
-            relationshipParent: ['did:eosio:eos:eoscanadacom#active'],
+            relationshipParent: ['did:antelope:eos:eoscanadacom#active'],
           },
           {
-            id: 'did:eosio:eos:eoscanadacom#claimer',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#claimer',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#claimer-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#claimer-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -372,81 +372,81 @@ export const testDids = [
                 weight: 1,
               },
             ],
-            relationshipParent: ['did:eosio:eos:eoscanadacom#active'],
+            relationshipParent: ['did:antelope:eos:eoscanadacom#active'],
           },
           {
-            id: 'did:eosio:eos:eoscanadacom#day2day',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#day2day',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaa#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-1',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-1',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaac#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-2',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-2',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaf#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-3',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-3',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaag#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaag#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-4',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-4',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaah#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaah#active',
                 },
                 weight: 1,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#day2day-5',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#day2day-5',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaai#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaai#active',
                 },
                 weight: 1,
               },
             ],
-            relationshipParent: ['did:eosio:eos:eoscanadacom#active'],
+            relationshipParent: ['did:antelope:eos:eoscanadacom#active'],
           },
           {
-            id: 'did:eosio:eos:eoscanadacom#eosforumdapp',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#eosforumdapp',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#eosforumdapp-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#eosforumdapp-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'EcdsaSecp256k1VerificationKey2019',
                   publicKeyJwk: {
                     crv: 'secp256k1',
@@ -460,65 +460,65 @@ export const testDids = [
                 weight: 1,
               },
             ],
-            relationshipParent: ['did:eosio:eos:eoscanadacom#active'],
+            relationshipParent: ['did:antelope:eos:eoscanadacom#active'],
           },
           {
-            id: 'did:eosio:eos:eoscanadacom#owner',
-            controller: 'did:eosio:eos:eoscanadacom',
+            id: 'did:antelope:eos:eoscanadacom#owner',
+            controller: 'did:antelope:eos:eoscanadacom',
             type: 'VerifiableCondition',
             threshold: 5,
             conditionWeightedThreshold: [
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-0',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-0',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaa#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-1',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-1',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaab#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaab#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-2',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-2',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaac#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-3',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-3',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaad#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaad#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-4',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-4',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaae#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaae#active',
                 },
                 weight: 2,
               },
               {
                 condition: {
-                  id: 'did:eosio:eos:eoscanadacom#owner-5',
-                  controller: 'did:eosio:eos:eoscanadacom',
+                  id: 'did:antelope:eos:eoscanadacom#owner-5',
+                  controller: 'did:antelope:eos:eoscanadacom',
                   type: 'VerifiableCondition',
-                  conditionDelegated: 'id:eosio:eos::eoscanadaaaf#active',
+                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
                 },
                 weight: 1,
               },
@@ -550,7 +550,7 @@ export const testDids = [
     },
   },
   {
-    did: 'did:eosio:unknownchainid',
+    did: 'did:antelope:unknownchainid',
     expectedResult: {
       didResolutionMetadata: { error: 'invalidDid' },
       didDocument: null,
@@ -558,7 +558,7 @@ export const testDids = [
     },
   },
   {
-    did: 'did:eosio:eos:unknownacc',
+    did: 'did:antelope:eos:unknownacc',
     expectedResult: {
       didResolutionMetadata: { error: 'notFound' },
       didDocument: null,
@@ -566,7 +566,7 @@ export const testDids = [
     },
   },
   {
-    did: 'did:eosio:eos:invalidaccountname',
+    did: 'did:antelope:eos:invalidaccountname',
     expectedResult: {
       didResolutionMetadata: { error: 'invalidDid' },
       didDocument: null,

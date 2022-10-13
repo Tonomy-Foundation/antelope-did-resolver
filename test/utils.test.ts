@@ -10,7 +10,7 @@ function base64ToBigNum(val: string) {
   return bn;
 }
 
-describe('EOSIO resolver utilities', () => {
+describe('Antelope resolver utilities', () => {
   it('Converts a BN to a base64url', async () => {
     const bigNumStart = new BN('1234567890');
     const base64url = bnToBase64Url(bigNumStart);
