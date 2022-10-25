@@ -8,7 +8,7 @@ import {
 } from './resolver';
 
 export function getResolver(): ResolverRegistry {
-  return { antelope: resolve };
+  return { eosio: resolve, antelope: resolve };
 }
 
 export {
