@@ -181,7 +181,7 @@ function createAccountMethod(
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
-    type: 'VerifiableCondition',
+    type: 'ConditionalProof2022',
     conditionDelegated:
       delegatedChain +
       ':' +
@@ -192,7 +192,7 @@ function createAccountMethod(
   return accountMethod;
 }
 
-function createDIDDocument(
+export function createDIDDocument(
   methodId: MethodId,
   did: string,
   antelopeAccount: AntelopeAccountResponse
@@ -203,7 +203,7 @@ function createDIDDocument(
     const method: VerificationMethod = {
       id: baseId,
       controller: did,
-      type: 'VerifiableCondition',
+      type: 'ConditionalProof2022',
       threshold: permission.required_auth.threshold,
       conditionWeightedThreshold: [],
     };
