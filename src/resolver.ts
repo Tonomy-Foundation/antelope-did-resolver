@@ -57,7 +57,10 @@ function getResolutionError(error: string): DIDResolutionResult {
   };
 }
 
-function checkDID(parsed: ParsedDID, registry: Registry): MethodId | undefined {
+export function checkDID(
+  parsed: ParsedDID,
+  registry: Registry
+): MethodId | undefined {
   // findChainByName
   const partsName = parsed.id.match(REGEX_NAME_AND_SUBJECT);
   if (partsName) {
@@ -86,7 +89,7 @@ function checkDID(parsed: ParsedDID, registry: Registry): MethodId | undefined {
   return undefined;
 }
 
-async function fetchAccount(
+export async function fetchAccount(
   methodId: MethodId,
   did: string,
   parsed: ParsedDID,
