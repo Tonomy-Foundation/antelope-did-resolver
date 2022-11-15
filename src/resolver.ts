@@ -57,7 +57,10 @@ function getResolutionError(error: string): DIDResolutionResult {
   };
 }
 
-function checkDID(parsed: ParsedDID, registry: Registry): MethodId | undefined {
+export function checkDID(
+  parsed: ParsedDID,
+  registry: Registry
+): MethodId | undefined {
   // findChainByName
   const partsName = parsed.id.match(REGEX_NAME_AND_SUBJECT);
   if (partsName) {
@@ -86,7 +89,7 @@ function checkDID(parsed: ParsedDID, registry: Registry): MethodId | undefined {
   return undefined;
 }
 
-async function fetchAccount(
+export async function fetchAccount(
   methodId: MethodId,
   did: string,
   parsed: ParsedDID,
@@ -181,7 +184,7 @@ function createAccountMethod(
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
-    type: 'VerifiableCondition',
+    type: 'ConditionalProof2022',
     conditionDelegated:
       delegatedChain +
       ':' +
@@ -192,7 +195,7 @@ function createAccountMethod(
   return accountMethod;
 }
 
-function createDIDDocument(
+export function createDIDDocument(
   methodId: MethodId,
   did: string,
   antelopeAccount: AntelopeAccountResponse
@@ -203,7 +206,7 @@ function createDIDDocument(
     const method: VerificationMethod = {
       id: baseId,
       controller: did,
-      type: 'VerifiableCondition',
+      type: 'ConditionalProof2022',
       threshold: permission.required_auth.threshold,
       conditionWeightedThreshold: [],
     };

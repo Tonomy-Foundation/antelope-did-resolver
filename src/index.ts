@@ -2,9 +2,12 @@ import { ResolverRegistry } from 'did-resolver';
 import {
   resolve,
   antelopeChainRegistry,
+  checkDID,
+  fetchAccount,
   REGEX_ACCOUNT_NAME,
   REGEX_CHAIN_ID,
   REGEX_CHAIN_NAME,
+  createDIDDocument,
 } from './resolver';
 
 export function getResolver(): ResolverRegistry {
@@ -16,4 +19,7 @@ export {
   REGEX_ACCOUNT_NAME,
   REGEX_CHAIN_ID,
   REGEX_CHAIN_NAME,
+  createDIDDocument,
+  checkDID,
+  fetchAccount,
 };
