@@ -27,8 +27,8 @@ interface AntelopeAccountResponse {
         parent: string,
         required_auth: {
             threshold: number,
-            keys: [AntelopeKeyType],
-            accounts: [AntelopeAccountPermission],
+            keys: AntelopeKeyType[],
+            accounts: AntelopeAccountPermission[],
             waits: [{
                 wait_sec: number,
                 weight: number

@@ -13,7 +13,6 @@ import {
   Registry,
   MethodId,
   VerificationMethod,
-  VerifiableConditionMethod,
   Jwk,
   ExtensibleSchema,
   AntelopeDIDResolutionOptions,
@@ -183,7 +182,7 @@ function createAccountMethod(
   did: string,
   account: AntelopeAccountPermission
 ): VerificationMethod {
-  const delegatedChain = baseId.slice(1, baseId.lastIndexOf(methodId.subject));
+  const delegatedChain = baseId.slice(1, baseId.lastIndexOf(methodId.subject) - 1);
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
@@ -203,38 +202,44 @@ export function createDIDDocument(
   did: string,
   antelopeAccount: AntelopeAccountResponse
 ): DIDDocument {
-  const verificationMethod: VerifiableConditionMethod[] = [];
+  const verificationMethod: VerificationMethod[] = [];
   for (const permission of antelopeAccount.permissions) {
     const baseId = did + '#' + permission.perm_name;
-    const method: VerificationMethod = {
-      id: baseId,
-      controller: did,
-      type: CONDITIONAL_PROOF_2022,
-      threshold: permission.required_auth.threshold,
-      conditionWeightedThreshold: [],
-    };
 
-    if (permission.parent !== '') {
-      method.relationshipParent = [did + '#' + permission.parent];
+    let method: VerificationMethod;
+    if (permission.required_auth.keys.length === 0 && permission.required_auth.accounts.length === 0) {
+      method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
+      method.id = baseId;
+    } else {
+      method = {
+        id: baseId,
+        controller: did,
+        type: CONDITIONAL_PROOF_2022,
+        threshold: permission.required_auth.threshold,
+        conditionWeightedThreshold: [],
+      };
+
+      if (permission.parent !== '') {
+        method.relationshipParent = [did + '#' + permission.parent];
+      }
+  
+      let i = 0;
+      for (const key of permission.required_auth.keys) {
+        method.conditionWeightedThreshold.push({
+          condition: createKeyMethod(baseId, i, did, key.key),
+          weight: key.weight,
+        });
+        i++;
+      }
+  
+      for (const account of permission.required_auth.accounts) {
+        method.conditionWeightedThreshold.push({
+          condition: createAccountMethod(baseId, methodId, i, did, account),
+          weight: account.weight,
+        });
+        i++;
+      }  
     }
-
-    let i = 0;
-    for (const key of permission.required_auth.keys) {
-      method.conditionWeightedThreshold.push({
-        condition: createKeyMethod(baseId, i, did, key.key),
-        weight: key.weight,
-      });
-      i++;
-    }
-
-    for (const account of permission.required_auth.accounts) {
-      method.conditionWeightedThreshold.push({
-        condition: createAccountMethod(baseId, methodId, i, did, account),
-        weight: account.weight,
-      });
-      i++;
-    }
-
     verificationMethod.push(method);
   }
 
