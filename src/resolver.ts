@@ -1,9 +1,9 @@
 import {
   ParsedDID,
-  Resolver,
   DIDResolutionResult,
   DIDDocument,
   ServiceEndpoint,
+  Resolvable,
 } from 'did-resolver';
 import { JsonRpc } from 'eosjs';
 import {
@@ -42,11 +42,14 @@ const REGEX_NAME_AND_SUBJECT = toRegExp(
   `${PATTERN_CHAIN_NAME}:${PATTERN_ACCOUNT_NAME}`
 );
 
+const CONDITIONAL_PROOF_2022 = 'ConditionalProof2022'
+
 export {
   antelopeChainRegistry,
   REGEX_ACCOUNT_NAME,
   REGEX_CHAIN_ID,
   REGEX_CHAIN_NAME,
+  CONDITIONAL_PROOF_2022,
 };
 
 function getResolutionError(error: string): DIDResolutionResult {
@@ -184,7 +187,7 @@ function createAccountMethod(
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
-    type: 'ConditionalProof2022',
+    type: CONDITIONAL_PROOF_2022,
     conditionDelegated:
       delegatedChain +
       ':' +
@@ -206,7 +209,7 @@ export function createDIDDocument(
     const method: VerificationMethod = {
       id: baseId,
       controller: did,
-      type: 'ConditionalProof2022',
+      type: CONDITIONAL_PROOF_2022,
       threshold: permission.required_auth.threshold,
       conditionWeightedThreshold: [],
     };
@@ -251,7 +254,8 @@ export function createDIDDocument(
 export async function resolve(
   did: string,
   parsed: ParsedDID,
-  didResolver: Resolver,
+  // @ts-ignore(TS6133 declared but never used)
+  resolver: Resolvable,
   options: AntelopeDIDResolutionOptions
 ): Promise<DIDResolutionResult> {
   const registry: Registry = {
@@ -272,7 +276,7 @@ export async function resolve(
     return getResolutionError('notFound');
   }
 
-  const didDoc = createDIDDocument(methodId, did, antelopeAccount);
+  const didDoc = createDIDDocument(methodId, parsed.did, antelopeAccount);
 
   return {
     didResolutionMetadata: { contentType: 'application/did+ld+json' },
