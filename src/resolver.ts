@@ -182,7 +182,7 @@ function createAccountMethod(
   did: string,
   account: AntelopeAccountPermission
 ): VerificationMethod {
-  const delegatedChain = baseId.slice(1, baseId.lastIndexOf(methodId.subject) - 1);
+  const delegatedChain = baseId.slice(0, baseId.lastIndexOf(methodId.subject) - 1);
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
