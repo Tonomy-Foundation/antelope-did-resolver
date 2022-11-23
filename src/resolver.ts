@@ -207,7 +207,7 @@ export function createDIDDocument(
     const baseId = did + '#' + permission.perm_name;
 
     let method: VerificationMethod;
-    if (permission.required_auth.keys.length === 0 && permission.required_auth.accounts.length === 0) {
+    if (permission.required_auth.keys.length === 1 && permission.required_auth.accounts.length === 0) {
       method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
       method.id = baseId;
     } else {
