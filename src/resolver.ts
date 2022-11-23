@@ -1,9 +1,9 @@
 import {
   ParsedDID,
-  Resolver,
   DIDResolutionResult,
   DIDDocument,
   ServiceEndpoint,
+  Resolvable,
 } from 'did-resolver';
 import { JsonRpc } from 'eosjs';
 import {
@@ -13,7 +13,6 @@ import {
   Registry,
   MethodId,
   VerificationMethod,
-  VerifiableConditionMethod,
   Jwk,
   ExtensibleSchema,
   AntelopeDIDResolutionOptions,
@@ -42,11 +41,14 @@ const REGEX_NAME_AND_SUBJECT = toRegExp(
   `${PATTERN_CHAIN_NAME}:${PATTERN_ACCOUNT_NAME}`
 );
 
+const CONDITIONAL_PROOF_2022 = 'ConditionalProof2022'
+
 export {
   antelopeChainRegistry,
   REGEX_ACCOUNT_NAME,
   REGEX_CHAIN_ID,
   REGEX_CHAIN_NAME,
+  CONDITIONAL_PROOF_2022,
 };
 
 function getResolutionError(error: string): DIDResolutionResult {
@@ -180,11 +182,11 @@ function createAccountMethod(
   did: string,
   account: AntelopeAccountPermission
 ): VerificationMethod {
-  const delegatedChain = baseId.slice(1, baseId.lastIndexOf(methodId.subject));
+  const delegatedChain = baseId.slice(0, baseId.lastIndexOf(methodId.subject) - 1);
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
-    type: 'ConditionalProof2022',
+    type: CONDITIONAL_PROOF_2022,
     conditionDelegated:
       delegatedChain +
       ':' +
@@ -200,38 +202,44 @@ export function createDIDDocument(
   did: string,
   antelopeAccount: AntelopeAccountResponse
 ): DIDDocument {
-  const verificationMethod: VerifiableConditionMethod[] = [];
+  const verificationMethod: VerificationMethod[] = [];
   for (const permission of antelopeAccount.permissions) {
     const baseId = did + '#' + permission.perm_name;
-    const method: VerificationMethod = {
-      id: baseId,
-      controller: did,
-      type: 'ConditionalProof2022',
-      threshold: permission.required_auth.threshold,
-      conditionWeightedThreshold: [],
-    };
 
-    if (permission.parent !== '') {
-      method.relationshipParent = [did + '#' + permission.parent];
+    let method: VerificationMethod;
+    if (permission.required_auth.keys.length === 0 && permission.required_auth.accounts.length === 0) {
+      method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
+      method.id = baseId;
+    } else {
+      method = {
+        id: baseId,
+        controller: did,
+        type: CONDITIONAL_PROOF_2022,
+        threshold: permission.required_auth.threshold,
+        conditionWeightedThreshold: [],
+      };
+
+      if (permission.parent !== '') {
+        method.relationshipParent = [did + '#' + permission.parent];
+      }
+  
+      let i = 0;
+      for (const key of permission.required_auth.keys) {
+        method.conditionWeightedThreshold.push({
+          condition: createKeyMethod(baseId, i, did, key.key),
+          weight: key.weight,
+        });
+        i++;
+      }
+  
+      for (const account of permission.required_auth.accounts) {
+        method.conditionWeightedThreshold.push({
+          condition: createAccountMethod(baseId, methodId, i, did, account),
+          weight: account.weight,
+        });
+        i++;
+      }  
     }
-
-    let i = 0;
-    for (const key of permission.required_auth.keys) {
-      method.conditionWeightedThreshold.push({
-        condition: createKeyMethod(baseId, i, did, key.key),
-        weight: key.weight,
-      });
-      i++;
-    }
-
-    for (const account of permission.required_auth.accounts) {
-      method.conditionWeightedThreshold.push({
-        condition: createAccountMethod(baseId, methodId, i, did, account),
-        weight: account.weight,
-      });
-      i++;
-    }
-
     verificationMethod.push(method);
   }
 
@@ -251,7 +259,8 @@ export function createDIDDocument(
 export async function resolve(
   did: string,
   parsed: ParsedDID,
-  didResolver: Resolver,
+  // @ts-ignore(TS6133 declared but never used)
+  resolver: Resolvable,
   options: AntelopeDIDResolutionOptions
 ): Promise<DIDResolutionResult> {
   const registry: Registry = {
@@ -272,7 +281,7 @@ export async function resolve(
     return getResolutionError('notFound');
   }
 
-  const didDoc = createDIDDocument(methodId, did, antelopeAccount);
+  const didDoc = createDIDDocument(methodId, parsed.did, antelopeAccount);
 
   return {
     didResolutionMetadata: { contentType: 'application/did+ld+json' },

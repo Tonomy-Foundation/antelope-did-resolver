@@ -27,8 +27,8 @@ interface AntelopeAccountResponse {
         parent: string,
         required_auth: {
             threshold: number,
-            keys: [AntelopeKeyType],
-            accounts: [AntelopeAccountPermission],
+            keys: AntelopeKeyType[],
+            accounts: AntelopeAccountPermission[],
             waits: [{
                 wait_sec: number,
                 weight: number
@@ -91,18 +91,6 @@ interface VerificationMethod extends ExtensibleSchema {
     type: string;
     controller: string;
 }
-
-interface VerifiableConditionMethod extends VerificationMethod {
-    conditionWeightedThreshold?: VerificationMethod[];
-    conditionThreshold?: VerificationMethod[];
-    conditionAnd?: VerificationMethod[];
-    conditionOr?: VerificationMethod[];
-    conditionDelegated?: string;
-    relationshipParent?: string[];
-    relationshipChild?: string[];
-    relationshipSibling?: string[];
-}
-
 
 interface Service {
     id: string,
