@@ -132,7 +132,7 @@ The DID document is built from the account data on the Antelope blockchain.
 
 ```javascript
 import { Resolver } from '@tonomy/did-resolver'
-import { getResolver } from 'antelope-did-resolver'
+import { getResolver } from '@tonomy/antelope-did-resolver'
 
 async function resolve() {
   const didResolver = new Resolver(getResolver())
@@ -145,7 +145,7 @@ async function resolve() {
 
 ```javascript
 import { Resolver } from '@tonomy/did-resolver'
-import { getResolver } from 'antelope-did-resolver'
+import { getResolver } from '@tonomy/antelope-did-resolver'
 
 async function resolve() {
 
