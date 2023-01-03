@@ -13,7 +13,7 @@ export const testDids = [
           {
             id: 'did:antelope:eos:testnet:jungle:lioninjungle#active',
             controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -40,7 +40,7 @@ export const testDids = [
           {
             id: 'did:antelope:eos:testnet:jungle:lioninjungle#owner',
             controller: 'did:antelope:eos:testnet:jungle:lioninjungle',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -93,7 +93,7 @@ export const testDids = [
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#active',
             controller:
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -124,7 +124,7 @@ export const testDids = [
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#delphi',
             controller:
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -155,7 +155,7 @@ export const testDids = [
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#owner',
             controller:
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -183,7 +183,7 @@ export const testDids = [
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks#rng',
             controller:
               'did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:caleosblocks',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -237,15 +237,15 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#active',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 4,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-0',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaa#active',
                 },
                 weight: 2,
               },
@@ -253,8 +253,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-1',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaab#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaab#active',
                 },
                 weight: 2,
               },
@@ -262,8 +262,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-2',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaac#active',
                 },
                 weight: 2,
               },
@@ -271,8 +271,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-3',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaad#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaad#active',
                 },
                 weight: 2,
               },
@@ -280,8 +280,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-4',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaae#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaae#active',
                 },
                 weight: 2,
               },
@@ -289,8 +289,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-5',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaf#active',
                 },
                 weight: 1,
               },
@@ -298,8 +298,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-6',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaag#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaag#active',
                 },
                 weight: 1,
               },
@@ -307,8 +307,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-7',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaah#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaah#active',
                 },
                 weight: 1,
               },
@@ -316,8 +316,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#active-8',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaai#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaai#active',
                 },
                 weight: 1,
               },
@@ -327,7 +327,7 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#blacklistops',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -352,7 +352,7 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#claimer',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -377,15 +377,15 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#day2day',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-0',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaa#active',
                 },
                 weight: 1,
               },
@@ -393,8 +393,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-1',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaac#active',
                 },
                 weight: 1,
               },
@@ -402,8 +402,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-2',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaf#active',
                 },
                 weight: 1,
               },
@@ -411,8 +411,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-3',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaag#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaag#active',
                 },
                 weight: 1,
               },
@@ -420,8 +420,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-4',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaah#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaah#active',
                 },
                 weight: 1,
               },
@@ -429,8 +429,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#day2day-5',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaai#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaai#active',
                 },
                 weight: 1,
               },
@@ -440,7 +440,7 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#eosforumdapp',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 1,
             conditionWeightedThreshold: [
               {
@@ -465,15 +465,15 @@ export const testDids = [
           {
             id: 'did:antelope:eos:eoscanadacom#owner',
             controller: 'did:antelope:eos:eoscanadacom',
-            type: 'VerifiableCondition',
+            type: 'ConditionalProof2022',
             threshold: 5,
             conditionWeightedThreshold: [
               {
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-0',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaa#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaa#active',
                 },
                 weight: 2,
               },
@@ -481,8 +481,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-1',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaab#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaab#active',
                 },
                 weight: 2,
               },
@@ -490,8 +490,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-2',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaac#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaac#active',
                 },
                 weight: 2,
               },
@@ -499,8 +499,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-3',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaad#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaad#active',
                 },
                 weight: 2,
               },
@@ -508,8 +508,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-4',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaae#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaae#active',
                 },
                 weight: 2,
               },
@@ -517,8 +517,8 @@ export const testDids = [
                 condition: {
                   id: 'did:antelope:eos:eoscanadacom#owner-5',
                   controller: 'did:antelope:eos:eoscanadacom',
-                  type: 'VerifiableCondition',
-                  conditionDelegated: 'id:antelope:eos::eoscanadaaaf#active',
+                  type: 'ConditionalProof2022',
+                  conditionDelegated: 'did:antelope:eos:eoscanadaaaf#active',
                 },
                 weight: 1,
               },

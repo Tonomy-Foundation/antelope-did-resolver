@@ -1,4 +1,4 @@
-import { Resolver } from 'did-resolver';
+import { Resolver } from '@tonomy/did-resolver';
 import { getResolver } from '../src/index';
 import fetch from 'node-fetch';
 import { testDids } from './testDids';

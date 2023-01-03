@@ -4,7 +4,7 @@ import {
   DIDDocument,
   ServiceEndpoint,
   Resolvable,
-} from 'did-resolver';
+} from '@tonomy/did-resolver';
 import { JsonRpc } from 'eosjs';
 import {
   AntelopeAccountPermission,
@@ -100,7 +100,7 @@ export async function fetchAccount(
   const serviceType = 'LinkedDomains';
   const services = findServices(methodId.chain.service, serviceType);
 
-  for (const service of services) {
+  for (const service of services as any) {
     const rpcOptions: ExtensibleSchema = {};
     if (options.fetch) rpcOptions.fetch = options.fetch;
     const rpc = new JsonRpc(service.serviceEndpoint, rpcOptions);
@@ -119,7 +119,7 @@ function findServices(
   service: Array<ServiceEndpoint>,
   type: string
 ): Array<ServiceEndpoint> {
-  return service.filter(s =>
+  return service.filter((s: any) =>
     Array.isArray(s.type) ? s.type.includes(type) : s.type === type
   );
 }
@@ -253,7 +253,7 @@ export function createDIDDocument(
     service: methodId.chain.service,
   };
 
-  return doc;
+  return doc as any;
 }
 
 export async function resolve(
