@@ -64,9 +64,9 @@ export const testDids = [
         ],
         service: [
           {
-            id: 'https://jungle3.cryptolions.io',
+            id: 'https://jungle4.cryptolions.io',
             type: 'LinkedDomains',
-            serviceEndpoint: 'https://jungle3.cryptolions.io',
+            serviceEndpoint: 'https://jungle4.cryptolions.io',
           },
         ],
       },

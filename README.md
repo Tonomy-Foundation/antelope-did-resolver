@@ -112,9 +112,9 @@ The did resolver takes the Antelope account name and retreives it's permission d
     ],
     "service": [
         {
-            "id": "https://jungle3.cryptolions.io",
+            "id": "https://jungle4.cryptolions.io",
             "type": "LinkedDomains",
-            "serviceEndpoint": "https://jungle3.cryptolions.io"
+            "serviceEndpoint": "https://jungle4.cryptolions.io"
         }
     ]
 }
