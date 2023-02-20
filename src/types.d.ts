@@ -106,6 +106,7 @@ interface Entry {
 export interface AntelopeDIDResolutionOptions extends DIDResolutionOptions {
     fetch?: any
     antelopeChainRegistry: Registry
+    blockChainUrl?: string
 }
 
 export interface Registry {

@@ -103,7 +103,8 @@ export async function fetchAccount(
   for (const service of services as any) {
     const rpcOptions: ExtensibleSchema = {};
     if (options.fetch) rpcOptions.fetch = options.fetch;
-    const rpc = new JsonRpc(service.serviceEndpoint, rpcOptions);
+    const endpoint = options.blockChainUrl ? options.blockChainUrl : service.serviceEndpoint
+    const rpc = new JsonRpc(endpoint, rpcOptions);
 
     try {
       return await rpc.get_account(methodId.subject);
@@ -288,4 +289,15 @@ export async function resolve(
     didDocument: didDoc,
     didDocumentMetadata: {},
   };
+}
+
+export function createResolver(options: {antelopeChainUrl?: string} = {}): any {
+
+  return function (  did: string,
+    parsed: ParsedDID,
+    // @ts-ignore(TS6133 declared but never used)
+    resolver: Resolvable,
+    antelopeOptions: AntelopeDIDResolutionOptions) {
+    return resolve(did,parsed, resolver,{...antelopeOptions,...options})
+  }
 }

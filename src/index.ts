@@ -9,10 +9,12 @@ import {
   REGEX_CHAIN_NAME,
   CONDITIONAL_PROOF_2022,
   createDIDDocument,
+  createResolver,
 } from './resolver';
 
-export function getResolver(): ResolverRegistry {
-  return { eosio: resolve, antelope: resolve };
+
+export function getResolver(options: {antelopeChainUrl?: string} = {}): ResolverRegistry {
+  return { eosio: resolve, antelope: createResolver(options) } as any;
 }
 
 export {
