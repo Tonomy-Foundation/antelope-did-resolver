@@ -12,8 +12,10 @@ import {
   createResolver,
 } from './resolver';
 
-
-export function getResolver(options: {antelopeChainUrl?: string} = {}): ResolverRegistry {
+export function getResolver(options: {
+  antelopeChainUrl?: string;
+  fetch?: () => Promise<any>;
+}): ResolverRegistry {
   return { eosio: resolve, antelope: createResolver(options) } as any;
 }
 

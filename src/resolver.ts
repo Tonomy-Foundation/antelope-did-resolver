@@ -22,7 +22,6 @@ import { KeyType } from 'eosjs/dist/eosjs-numeric';
 import { ec } from 'elliptic';
 import { bnToBase64Url } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
-import { parse } from 'did-resolver';
 
 const PATTERN_ACCOUNT_NAME = `([a-z1-5.]{0,12}[a-z1-5])`;
 const PATTERN_CHAIN_ID = `([A-Fa-f0-9]{64})`;
@@ -99,24 +98,40 @@ export async function fetchAccount(
   options: AntelopeDIDResolutionOptions
 ): Promise<AntelopeAccountResponse | null> {
   const serviceType = 'LinkedDomains';
+  if (options.antelopeChainUrl) {
+    return await createRpcFetchAccount(
+      methodId,
+      {
+        serviceEndpoint: options.antelopeChainUrl,
+      },
+      options
+    );
+  }
   const services = findServices(methodId.chain.service, serviceType);
 
   for (const service of services as any) {
-    const rpcOptions: ExtensibleSchema = {};
-    if (options.fetch) rpcOptions.fetch = options.fetch;
-    const endpoint = options.blockChainUrl
-      ? options.blockChainUrl
-      : service.serviceEndpoint;
-    const rpc = new JsonRpc(endpoint, rpcOptions);
-
-    try {
-      return await rpc.get_account(methodId.subject);
-    } catch (e) {
-      console.error(e);
-      // then try other services in case of error.
-    }
+    return await createRpcFetchAccount(methodId, service, options);
   }
   return null;
+}
+
+async function createRpcFetchAccount(
+  methodId: MethodId,
+  service: any,
+  options: AntelopeDIDResolutionOptions
+) {
+  const rpcOptions: ExtensibleSchema = {};
+  if (options.fetch) rpcOptions.fetch = options.fetch;
+  const endpoint = service.serviceEndpoint;
+  console.log('fetch it', endpoint, methodId.subject, rpcOptions);
+  const rpc = new JsonRpc(endpoint, rpcOptions);
+
+  try {
+    return await rpc.get_account(methodId.subject);
+  } catch (e) {
+    console.error(e);
+    // then try other services in case of error.
+  }
 }
 
 function findServices(
@@ -284,16 +299,16 @@ export async function resolve(
   };
 
   let methodId = checkDID(parsed, registry);
-  if (options.blockChainUrl) {
+  if (options.antelopeChainUrl) {
+    const [chainId, subject] = parsed.id.split(':');
     methodId = {
       chain: {
-        chainId: parsed.method,
+        chainId,
         service: [],
       },
-      subject: parsed.id,
+      subject,
     };
   }
-
   if (!methodId) {
     // invalid method-specific-id OR no matching chain in the registry
     return getResolutionError('invalidDid');
@@ -306,7 +321,7 @@ export async function resolve(
   }
 
   const didDoc = createDIDDocument(methodId, parsed.did, antelopeAccount);
-
+  console.log(didDoc);
   return {
     didResolutionMetadata: { contentType: 'application/did+ld+json' },
     didDocument: didDoc,
