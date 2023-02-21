@@ -22,6 +22,7 @@ import { KeyType } from 'eosjs/dist/eosjs-numeric';
 import { ec } from 'elliptic';
 import { bnToBase64Url } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
+import { parse } from 'did-resolver';
 
 const PATTERN_ACCOUNT_NAME = `([a-z1-5.]{0,12}[a-z1-5])`;
 const PATTERN_CHAIN_ID = `([A-Fa-f0-9]{64})`;
@@ -41,7 +42,7 @@ const REGEX_NAME_AND_SUBJECT = toRegExp(
   `${PATTERN_CHAIN_NAME}:${PATTERN_ACCOUNT_NAME}`
 );
 
-const CONDITIONAL_PROOF_2022 = 'ConditionalProof2022'
+const CONDITIONAL_PROOF_2022 = 'ConditionalProof2022';
 
 export {
   antelopeChainRegistry,
@@ -103,7 +104,9 @@ export async function fetchAccount(
   for (const service of services as any) {
     const rpcOptions: ExtensibleSchema = {};
     if (options.fetch) rpcOptions.fetch = options.fetch;
-    const endpoint = options.blockChainUrl ? options.blockChainUrl : service.serviceEndpoint
+    const endpoint = options.blockChainUrl
+      ? options.blockChainUrl
+      : service.serviceEndpoint;
     const rpc = new JsonRpc(endpoint, rpcOptions);
 
     try {
@@ -183,7 +186,10 @@ function createAccountMethod(
   did: string,
   account: AntelopeAccountPermission
 ): VerificationMethod {
-  const delegatedChain = baseId.slice(0, baseId.lastIndexOf(methodId.subject) - 1);
+  const delegatedChain = baseId.slice(
+    0,
+    baseId.lastIndexOf(methodId.subject) - 1
+  );
   const accountMethod = {
     id: baseId + '-' + i,
     controller: did,
@@ -208,8 +214,16 @@ export function createDIDDocument(
     const baseId = did + '#' + permission.perm_name;
 
     let method: VerificationMethod;
-    if (permission.required_auth.keys.length === 1 && permission.required_auth.accounts.length === 0) {
-      method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
+    if (
+      permission.required_auth.keys.length === 1 &&
+      permission.required_auth.accounts.length === 0
+    ) {
+      method = createKeyMethod(
+        baseId,
+        0,
+        did,
+        permission.required_auth.keys[0].key
+      );
       method.id = baseId;
     } else {
       method = {
@@ -223,7 +237,7 @@ export function createDIDDocument(
       if (permission.parent !== '') {
         method.relationshipParent = [did + '#' + permission.parent];
       }
-  
+
       let i = 0;
       for (const key of permission.required_auth.keys) {
         method.conditionWeightedThreshold.push({
@@ -232,14 +246,14 @@ export function createDIDDocument(
         });
         i++;
       }
-  
+
       for (const account of permission.required_auth.accounts) {
         method.conditionWeightedThreshold.push({
           condition: createAccountMethod(baseId, methodId, i, did, account),
           weight: account.weight,
         });
         i++;
-      }  
+      }
     }
     verificationMethod.push(method);
   }
@@ -269,7 +283,16 @@ export async function resolve(
     ...options.antelopeChainRegistry,
   };
 
-  const methodId = checkDID(parsed, registry);
+  let methodId = checkDID(parsed, registry);
+  if (options.blockChainUrl) {
+    methodId = {
+      chain: {
+        chainId: parsed.method,
+        service: [],
+      },
+      subject: parsed.id,
+    };
+  }
 
   if (!methodId) {
     // invalid method-specific-id OR no matching chain in the registry
@@ -291,13 +314,16 @@ export async function resolve(
   };
 }
 
-export function createResolver(options: {antelopeChainUrl?: string} = {}): any {
-
-  return function (  did: string,
+export function createResolver(
+  options: { antelopeChainUrl?: string } = {}
+): any {
+  return function(
+    did: string,
     parsed: ParsedDID,
     // @ts-ignore(TS6133 declared but never used)
     resolver: Resolvable,
-    antelopeOptions: AntelopeDIDResolutionOptions) {
-    return resolve(did,parsed, resolver,{...antelopeOptions,...options})
-  }
+    antelopeOptions: AntelopeDIDResolutionOptions
+  ) {
+    return resolve(did, parsed, resolver, { ...antelopeOptions, ...options });
+  };
 }
