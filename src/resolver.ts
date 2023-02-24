@@ -123,7 +123,6 @@ async function createRpcFetchAccount(
   const rpcOptions: ExtensibleSchema = {};
   if (options.fetch) rpcOptions.fetch = options.fetch;
   const endpoint = service.serviceEndpoint;
-  console.log('fetch it', endpoint, methodId.subject, rpcOptions);
   const rpc = new JsonRpc(endpoint, rpcOptions);
 
   try {
@@ -227,6 +226,10 @@ export function createDIDDocument(
   const verificationMethod: VerificationMethod[] = [];
   for (const permission of antelopeAccount.permissions) {
     const baseId = did + '#' + permission.perm_name;
+
+    permission.required_auth.accounts = permission.required_auth.accounts.filter(
+      account => account.permission.permission !== 'eosio.code'
+    );
 
     let method: VerificationMethod;
     if (
