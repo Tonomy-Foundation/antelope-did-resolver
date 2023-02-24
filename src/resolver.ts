@@ -324,7 +324,6 @@ export async function resolve(
   }
 
   const didDoc = createDIDDocument(methodId, parsed.did, antelopeAccount);
-  console.log(didDoc);
   return {
     didResolutionMetadata: { contentType: 'application/did+ld+json' },
     didDocument: didDoc,
