@@ -5,7 +5,7 @@ import {
   ServiceEndpoint,
   Resolvable,
 } from '@tonomy/did-resolver';
-import { JsonRpc } from 'eosjs';
+import { JsonRpc, RpcError } from 'eosjs';
 import {
   AntelopeAccountPermission,
   AntelopeAccountResponse,
@@ -128,7 +128,17 @@ async function createRpcFetchAccount(
   try {
     return await rpc.get_account(methodId.subject);
   } catch (e) {
-    console.error(e);
+    if (e instanceof RpcError) {
+      const error = e.json;
+      if (error.code === 500 && error.error?.code === 0 && error.error?.details[0]?.message?.startsWith('unknown key')) {
+        // Antelope v3+ returns 500 error when account does not exist
+        // Eosio v2 (with eosjs) returns null when account does not exist
+        // TODO update to latest eosjs to fix this...???
+        return null;
+      }
+    }
+
+    console.error(JSON.stringify(e, null, 2));
     // then try other services in case of error.
   }
 }
@@ -334,7 +344,7 @@ export async function resolve(
 export function createResolver(
   options: { antelopeChainUrl?: string } = {}
 ): any {
-  return function(
+  return function (
     did: string,
     parsed: ParsedDID,
     // @ts-ignore(TS6133 declared but never used)
