@@ -1,4 +1,14 @@
-# Contributions
+# Antelope DID Resolver
+
+This library is intended to use Antelope accounts as fully self managed [Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/#decentralized-identifiers-dids) and wrap them in a [DID Document](https://w3c-ccg.github.io/did-spec/#did-documents)
+
+It supports the proposed [Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/) spec from the [W3C Credentials Community Group](https://w3c-ccg.github.io).
+
+It requires the `did-resolver` library, which is the primary interface for resolving DIDs.
+
+The DID specification can be found at [antelope-did-registry](https://github.com/Tonomy-Foundation/antelope-did-spec).
+
+## Contributions
 
 The Antelope Identity Working Group is an open working group where we, the Antelope community, discuss identity on Antelope chains and progress work such as this DID specification and it's implementation. We have a weekly meeting and a Slack channel.
 
@@ -9,11 +19,13 @@ Comments regarding this document are welcome. Please file issues and PRs directl
 See [README.tsdx.md](./README.tsdx.md) for instructions on how to run, build, test and test this library.
 
 Contributors:
+
 - Jack Tanner <jack@gimly.io>
 - Jonas Walter
 - Sebastian Montero <sebastian@m1ghty.io>
 - Sana Rauf | Block One
 - Julius Rahaus
+- Rebal Alhaqash
 
 <!-- Make sure images have 75 pixel height -->
 [![Gimly](./assets/gimly.jpg)](https://gimly.io)
@@ -26,23 +38,15 @@ Contributors:
 ![](./assets/filler.png)
 [![Block One](./assets/block-one.png)](https://block.one)
 
-# Antelope DID Resolver
-
-This library is intended to use Antelope accounts as fully self managed [Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/#decentralized-identifiers-dids) and wrap them in a [DID Document](https://w3c-ccg.github.io/did-spec/#did-documents)
-
-It supports the proposed [Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/) spec from the [W3C Credentials Community Group](https://w3c-ccg.github.io).
-
-It requires the `did-resolver` library, which is the primary interface for resolving DIDs.
-
-The DID specification can be found at [antelope-did-registry](https://github.com/Tonomy-Foundation/antelope-did-spec).
-
 ## DID method
 
 The [DID Method](https://w3c.github.io/did-core/#methods) schema can be consumed in either of the following two formats:
+
 1. Registered chain name schema
 2. Chain-id schema
 
 For example:
+
 - `did:antelope:4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11:example`
 - `did:antelope:telos:example`
 
