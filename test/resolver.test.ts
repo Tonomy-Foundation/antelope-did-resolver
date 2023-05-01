@@ -10,7 +10,7 @@ describe('resolver tests', () => {
   const responses = testDids.map(({ did, expectedResult }) => ({
     did,
     expectedResult,
-    asyncResponse: resolver.resolve(did, { fetch }),
+    asyncResponse: resolver.resolve(did, { fetch })
   }));
   describe('Dids resolve to DIDResolutionResult', () => {
     responses.forEach(({ did, asyncResponse }) => {

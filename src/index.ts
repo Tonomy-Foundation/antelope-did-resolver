@@ -12,7 +12,7 @@ import {
   createResolver,
 } from './resolver';
 
-export function getResolver(options: {
+export function getResolver(options?: {
   antelopeChainUrl?: string;
   fetch?: () => Promise<any>;
 }): ResolverRegistry {
