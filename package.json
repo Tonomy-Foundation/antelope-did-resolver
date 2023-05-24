@@ -79,6 +79,6 @@
   },
   "dependencies": {
     "base64url": "^3.0.1",
-    "eosjs": "^22.1.0"
+    "eosjs": "^21.0.4"
   }
 }
