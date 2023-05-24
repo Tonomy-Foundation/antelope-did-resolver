@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     branches:
-      - master
+      - feature/fix-buffer
 
 jobs:
   publish-npm:
