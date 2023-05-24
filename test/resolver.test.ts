@@ -34,7 +34,7 @@ describe('resolver tests', () => {
     });
   });
   describe('didResolutionMetadata has error if and only if didDocument is null', () => {
-    responses.forEach(({ did, asyncResponse, expectedResult }) => {
+    responses.forEach(({ did, asyncResponse }) => {
       it(`did: ${did}`, async () => {
         const response = await asyncResponse;
         if (response.didDocument === null)

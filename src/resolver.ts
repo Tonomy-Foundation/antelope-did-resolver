@@ -93,8 +93,8 @@ export function checkDID(
 
 export async function fetchAccount(
   methodId: MethodId,
-  did: string,
-  parsed: ParsedDID,
+  _did: string,
+  _parsed: ParsedDID,
   options: AntelopeDIDResolutionOptions
 ): Promise<AntelopeAccountResponse | null> {
   const serviceType = 'LinkedDomains';
@@ -167,7 +167,6 @@ function getCurveNamesFromType(
       return { jwkCurve: 'P-256', verificationMethodType: 'JsonWebKey2020' };
   }
 
-  throw new Error('Key type not supported');
 }
 
 function createKeyMethod(
