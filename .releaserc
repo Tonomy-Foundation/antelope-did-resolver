@@ -4,13 +4,7 @@
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "angular",
-        "releaseRules": [
-          {
-            "type": "*",
-            "release": "patch"
-          }
-        ]
+        "preset": "angular"
       }
     ],
     [
@@ -33,5 +27,5 @@
     ],
     "@semantic-release/github"
   ],
-  "branches": "feature/fix-buffer"
+  "branches": "master"
 }
