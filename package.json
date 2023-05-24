@@ -1,6 +1,6 @@
 {
   "name": "@tonomy/antelope-did-resolver",
-  "author": "Jack Tanner <jack@gimly.io>",
+  "author": "Jack Tanner <jack+public@tonomy.foundation>",
   "version": "0.2.3",
   "license": "Apache-2.0",
   "description": "Resolve Decentralized Identifier (DID) documents based on Antelope blockchains",
@@ -17,16 +17,11 @@
     "type": "git",
     "url": "git@github.com/Tonomy-Foundation/antelope-did-resolver.git"
   },
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "files": [
-    "dist",
+    "build",
     "src",
     "antelope-did-chain-registry.json"
   ],
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build --transpileOnly",
@@ -36,28 +31,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "module": "dist/antelope-did-resolver.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/antelope-did-resolver.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/antelope-did-resolver.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "contributors": [
     "Jack Tanner <jack@tonomy.foundation>",
     "Rebal Alhaqash <rebal@tonomy.foundation>"
