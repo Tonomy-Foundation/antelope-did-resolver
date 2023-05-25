@@ -4,11 +4,12 @@ const config: Config = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     transform: {
-        '^.+\\.[t|j]sx?$': ['babel-jest', { configFile: './babel.config.json' }],
+        '^.+\\.[t|j]sx?$': 'babel-jest',
     },
     transformIgnorePatterns: [],
     roots: ['<rootDir>'],
     testMatch: ['**/*.test.ts'],
+    resolver: './custom-resolver.cjs',
 };
 
 export default config;

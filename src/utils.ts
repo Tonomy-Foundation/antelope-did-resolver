@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import uint8arrays from 'uint8arrays';
+import * as uint8arrays from 'uint8arrays';
 
 // Adapted from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
 export function bnToBase64Url(bn: BN): string {
@@ -11,12 +11,12 @@ export function bnToBase64Url(bn: BN): string {
 }
 
 // Copied from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
-export function bytesToBase64(b: Uint8Array): string {
+function bytesToBase64(b: Uint8Array): string {
   return uint8arrays.toString(b, 'base64pad');
 }
 
 // Adapted from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
-export function bigintToBytes(n: bigint): Uint8Array {
+function bigintToBytes(n: bigint): Uint8Array {
   let b64 = n.toString(16);
 
   // Pad an extra '0' if the hex string is an odd length

@@ -49,7 +49,7 @@
     "release": "semantic-release --debug"
   },
   "contributors": [
-    "Jack Tanner <jack@tonomy.foundation>",
+    "Jack Tanner <jack+public@tonomy.foundation>",
     "Rebal Alhaqash <rebal@tonomy.foundation>"
   ],
   "devDependencies": {
@@ -79,7 +79,6 @@
   },
   "dependencies": {
     "@tonomy/did-resolver": "^4.0.4",
-    "base64url": "^3.0.1",
     "eosjs": "^21.0.4",
     "uint8arrays": "^4.0.3"
   }
