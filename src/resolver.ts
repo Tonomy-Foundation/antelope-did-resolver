@@ -1,14 +1,7 @@
 import { ParsedDID, DIDResolutionResult, DIDDocument, ServiceEndpoint, Resolvable } from '@tonomy/did-resolver';
-import { APIError, PublicKey, KeyType } from '@greymass/eosio';
-import {
-  AntelopeAccountPermission,
-  AntelopeAccountResponse,
-  Entry,
-  Registry,
-  MethodId,
-  VerificationMethod,
-  AntelopeDIDResolutionOptions,
-} from './types';
+import { APIError, PublicKey } from '@greymass/eosio';
+import { AccountObject, AccountPermission } from '@greymass/eosio/src/api/v1/types';
+import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
 import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
 import { getApi } from './api';
@@ -77,7 +70,7 @@ export async function fetchAccount(
   _did: string,
   _parsed: ParsedDID,
   options: AntelopeDIDResolutionOptions
-): Promise<AntelopeAccountResponse | null> {
+): Promise<AccountPermission | null> {
   const serviceType = 'LinkedDomains';
 
   if (options.antelopeChainUrl) {
@@ -99,7 +92,11 @@ export async function fetchAccount(
   return null;
 }
 
-async function createRpcFetchAccount(methodId: MethodId, service: any, options: AntelopeDIDResolutionOptions) {
+async function createRpcFetchAccount(
+  methodId: MethodId,
+  service: any,
+  options: AntelopeDIDResolutionOptions
+): Promise<AccountObject | null> {
   const endpoint = service.serviceEndpoint;
 
   try {
@@ -140,7 +137,7 @@ function createAccountMethod(
   methodId: MethodId,
   i: number,
   did: string,
-  account: AntelopeAccountPermission
+  account: AccountObject
 ): VerificationMethod {
   const delegatedChain = baseId.slice(0, baseId.lastIndexOf(methodId.subject) - 1);
   const accountMethod = {
@@ -153,11 +150,7 @@ function createAccountMethod(
   return accountMethod;
 }
 
-export function createDIDDocument(
-  methodId: MethodId,
-  did: string,
-  antelopeAccount: AntelopeAccountResponse
-): DIDDocument {
+export function createDIDDocument(methodId: MethodId, did: string, antelopeAccount: AccountObject): DIDDocument {
   const verificationMethod: VerificationMethod[] = [];
 
   for (const permission of antelopeAccount.permissions) {
@@ -177,12 +170,12 @@ export function createDIDDocument(
         id: baseId,
         controller: did,
         type: CONDITIONAL_PROOF_2022,
-        threshold: permission.required_auth.threshold,
+        threshold: permission.required_auth.threshold.toNumber(),
         conditionWeightedThreshold: [],
       };
 
-      if (permission.parent !== '') {
-        method.relationshipParent = [did + '#' + permission.parent];
+      if (permission.parent.toString() !== '') {
+        method.relationshipParent = [did + '#' + permission.parent.toString()];
       }
 
       let i = 0;
@@ -190,7 +183,7 @@ export function createDIDDocument(
       for (const key of permission.required_auth.keys) {
         method.conditionWeightedThreshold.push({
           condition: createKeyMethod(baseId, i, did, key.key),
-          weight: key.weight,
+          weight: key.weight.toNumber(),
         });
         i++;
       }
@@ -198,7 +191,7 @@ export function createDIDDocument(
       for (const account of permission.required_auth.accounts) {
         method.conditionWeightedThreshold.push({
           condition: createAccountMethod(baseId, methodId, i, did, account),
-          weight: account.weight,
+          weight: account.weight.toNumber(),
         });
         i++;
       }
