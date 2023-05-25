@@ -22,11 +22,11 @@
       "node"
     ],
     "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "noUnusedLocals": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

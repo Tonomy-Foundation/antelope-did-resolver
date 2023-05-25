@@ -1,19 +1,14 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-    transform: {
-        '^.+\\.m?tsx?$': [
-            'ts-jest',
-            {
-                useESM: true,
-                tsconfig: './tsconfig.json',
-            },
-        ],
-    },
-    extensionsToTreatAsEsm: ['.ts'],
-    testMatch: ['**/*.test.ts'],
+    preset: 'ts-jest',
     testEnvironment: 'node',
-    coverageProvider: 'v8'
-}
+    transform: {
+        '^.+\\.[t|j]sx?$': ['babel-jest', { configFile: './babel.config.json' }],
+    },
+    transformIgnorePatterns: [],
+    roots: ['<rootDir>'],
+    testMatch: ['**/*.test.ts'],
+};
 
 export default config;
