@@ -1,6 +1,7 @@
 import { ParsedDID, DIDResolutionResult, DIDDocument, ServiceEndpoint, Resolvable } from '@tonomy/did-resolver';
 import { APIError, PublicKey } from '@greymass/eosio';
-import { AccountObject, AccountPermission } from '@greymass/eosio/src/api/v1/types';
+import { AccountObject } from '@greymass/eosio/src/api/v1/types';
+import { PermissionLevelWeight } from '@greymass/eosio/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
 import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
@@ -70,44 +71,35 @@ export async function fetchAccount(
   _did: string,
   _parsed: ParsedDID,
   options: AntelopeDIDResolutionOptions
-): Promise<AccountPermission | null> {
+): Promise<AccountObject | null> {
   const serviceType = 'LinkedDomains';
 
   if (options.antelopeChainUrl) {
-    return await createRpcFetchAccount(
-      methodId,
-      {
-        serviceEndpoint: options.antelopeChainUrl,
-      },
-      options
-    );
+    return await createRpcFetchAccount(methodId, {
+      serviceEndpoint: options.antelopeChainUrl,
+    });
   }
 
   const services = findServices(methodId.chain.service, serviceType);
 
   for (const service of services as any) {
-    return await createRpcFetchAccount(methodId, service, options);
+    return await createRpcFetchAccount(methodId, service);
   }
 
   return null;
 }
 
-async function createRpcFetchAccount(
-  methodId: MethodId,
-  service: any,
-  options: AntelopeDIDResolutionOptions
-): Promise<AccountObject | null> {
+async function createRpcFetchAccount(methodId: MethodId, service: any): Promise<AccountObject | null> {
   const endpoint = service.serviceEndpoint;
 
   try {
+    // @ts-expect-error AccountObject is not assignable to @greymass/eosio AccountObject
     return await getApi(endpoint).v1.chain.get_account(methodId.subject);
   } catch (e) {
-    if (e instanceof APIError) {
-      if (e.message.startsWith('Account not found at /v1/chain/get_account')) {
-        return null;
-      } else {
-        throw e;
-      }
+    if (e instanceof APIError && e.message.startsWith('Account not found at /v1/chain/get_account')) {
+      return null;
+    } else {
+      throw e;
     }
   }
 }
@@ -116,8 +108,8 @@ function findServices(service: Array<ServiceEndpoint>, type: string): Array<Serv
   return service.filter((s: any) => (Array.isArray(s.type) ? s.type.includes(type) : s.type === type));
 }
 
-function createKeyMethod(baseId: string, i: number, did: string, key: string): VerificationMethod {
-  const pubKey = PublicKey.from(key);
+function createKeyMethod(baseId: string, i: number, did: string, key: PublicKey): VerificationMethod {
+  const pubKey = key;
 
   const publicKeyJwk = createJWK(pubKey);
   const { verificationMethodType } = getCurveNamesFromType(pubKey);
@@ -137,7 +129,7 @@ function createAccountMethod(
   methodId: MethodId,
   i: number,
   did: string,
-  account: AccountObject
+  account: PermissionLevelWeight
 ): VerificationMethod {
   const delegatedChain = baseId.slice(0, baseId.lastIndexOf(methodId.subject) - 1);
   const accountMethod = {
@@ -157,12 +149,13 @@ export function createDIDDocument(methodId: MethodId, did: string, antelopeAccou
     const baseId = did + '#' + permission.perm_name;
 
     permission.required_auth.accounts = permission.required_auth.accounts.filter(
-      (account) => account.permission.permission !== 'eosio.code'
+      (account) => account.permission.permission.toString() !== 'eosio.code'
     );
 
     let method: VerificationMethod;
 
     if (permission.required_auth.keys.length === 1 && permission.required_auth.accounts.length === 0) {
+      // @ts-expect-error PublicKey is not assignable to @greymass/eosio PublicKey
       method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
       method.id = baseId;
     } else {
@@ -182,6 +175,7 @@ export function createDIDDocument(methodId: MethodId, did: string, antelopeAccou
 
       for (const key of permission.required_auth.keys) {
         method.conditionWeightedThreshold.push({
+          // @ts-expect-error PublicKey is not assignable to @greymass/eosio PublicKey
           condition: createKeyMethod(baseId, i, did, key.key),
           weight: key.weight.toNumber(),
         });
