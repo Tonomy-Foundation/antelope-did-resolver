@@ -6,4 +6,12 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
     },
+    "jest.autoRun": {
+        "onSave": false,
+        "onStartup": false
+    },
+    "jest.debugMode": false,
+    "jest.testExplorer": {
+        "enabled": true
+    },
 }
