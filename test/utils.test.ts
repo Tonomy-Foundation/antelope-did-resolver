@@ -1,5 +1,6 @@
 import { bnToBase64Url } from '../src/utils';
 import BN from 'bn.js';
+
 const bignum = require('asn1.js').bignum;
 
 // copied from https://github.com/Brightspace/node-jwk-to-pem/blob/master/src/b64-to-bn.js
@@ -7,6 +8,7 @@ const bignum = require('asn1.js').bignum;
 function base64ToBigNum(val: string) {
   const buf = Buffer.from(val, 'base64');
   const bn = (val = new bignum(buf, 10, 'be').iabs());
+
   return bn;
 }
 
