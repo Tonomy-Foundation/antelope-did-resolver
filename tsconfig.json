@@ -6,16 +6,23 @@
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "build",
+    "declarationDir": "./build/types",
     "strict": true,
     "isolatedModules": true,
+    "noImplicitReturns": true,
     "types": [
       "jest"
     ],
     "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "useUnknownInCatchVariables": false,
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "test",
