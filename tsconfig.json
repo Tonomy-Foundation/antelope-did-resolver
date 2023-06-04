@@ -13,7 +13,7 @@
     "types": [
       "jest"
     ],
-    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": false,
