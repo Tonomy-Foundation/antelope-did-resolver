@@ -20,7 +20,7 @@
         "assets": [
           "CHANGELOG.md",
           "package.json",
-          "package-lock.json"
+          "yarn.lock"
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]"
       }

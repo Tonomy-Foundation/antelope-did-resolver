@@ -1,6 +1,7 @@
 import { Resolver } from '@tonomy/did-resolver';
 import { getResolver } from '../src/index';
 import { testDids } from './testDids';
+import { jest } from '@jest/globals';
 
 jest.setTimeout(10000);
 

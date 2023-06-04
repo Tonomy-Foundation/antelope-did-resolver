@@ -14,9 +14,7 @@
   "source": "src/index.ts",
   "main": "./build/index.cjs",
   "module": "./build/index.module.js",
-  "unpkg": "./build/index.umd.js",
   "types": "./build/types/index.d.ts",
-  "umd:main": "./build/index.umd.js",
   "exports": {
     ".": {
       "types": "./build/types/index.d.ts",
@@ -37,12 +35,13 @@
   "files": [
     "build",
     "src",
-    "antelope-did-chain-registry.json"
+    "antelope-did-chain-registry.json",
+    "LICENSE"
   ],
   "scripts": {
     "start": "microbundle watch",
     "build": "microbundle --compress=false",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "lint": "eslint src test --ext .ts --resolve-plugins-relative-to .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "npm run build",
@@ -59,7 +58,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/elliptic": "^6.4.14",
-    "@types/jest": "^29.5.1",
+    "@types/jest": "^29.5.2",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "asn1.js": "^5.4.1",
     "eslint": "^8.41.0",
@@ -72,8 +71,8 @@
     "semantic-release": "^21.0.2",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "tslib": "^2.5.2",
-    "typescript": "^4.9.5"
+    "tslib": "^2.5.3",
+    "typescript": "^5.1.3"
   },
   "dependencies": {
     "@greymass/eosio": "^0.7.0",
