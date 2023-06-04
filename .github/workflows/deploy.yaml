@@ -5,6 +5,8 @@ permissions:
 
 on:
   push:
+    branches:
+      - feature/fix-uint8array
 
 jobs:
   publish-npm:
