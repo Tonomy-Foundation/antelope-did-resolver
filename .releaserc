@@ -27,5 +27,5 @@
     ],
     "@semantic-release/github"
   ],
-  "branches": "feature/fix-uint8array"
+  "branches": "master"
 }
