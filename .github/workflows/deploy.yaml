@@ -8,6 +8,7 @@ on:
     branches:
       - feature/fix-uint8array
 
+
 jobs:
   publish-npm:
     runs-on: ubuntu-20.04
