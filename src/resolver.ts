@@ -1,4 +1,4 @@
-import { ParsedDID, DIDResolutionResult, DIDDocument, ServiceEndpoint, Resolvable } from '@tonomy/did-resolver';
+import { ParsedDID, DIDResolutionResult, DIDDocument, ServiceEndpoint, Resolvable } from 'did-resolver';
 import { APIError, PublicKey } from '@greymass/eosio';
 import { AccountObject } from '@greymass/eosio/src/api/v1/types';
 import { PermissionLevelWeight } from '@greymass/eosio/src/chain/authority';

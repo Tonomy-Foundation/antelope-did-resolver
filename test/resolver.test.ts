@@ -1,4 +1,4 @@
-import { Resolver } from '@tonomy/did-resolver';
+import { Resolver } from 'did-resolver';
 import { getResolver } from '../src/index';
 import { testDids } from './testDids';
 import { jest } from '@jest/globals';
