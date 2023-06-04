@@ -135,7 +135,7 @@ The DID document is built from the account data on the Antelope blockchain.
 ### Resolving from pre-registered Antelope chains
 
 ```javascript
-import { Resolver } from '@tonomy/did-resolver'
+import { Resolver } from 'did-resolver'
 import { getResolver } from '@tonomy/antelope-did-resolver'
 
 async function resolve() {
@@ -148,7 +148,7 @@ async function resolve() {
 ### Resolving with a custom Antelope chain or custom API
 
 ```javascript
-import { Resolver } from '@tonomy/did-resolver'
+import { Resolver } from 'did-resolver'
 import { getResolver } from '@tonomy/antelope-did-resolver'
 
 async function resolve() {

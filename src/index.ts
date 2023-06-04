@@ -1,4 +1,4 @@
-import { ResolverRegistry } from '@tonomy/did-resolver';
+import { ResolverRegistry } from 'did-resolver';
 import {
   resolve,
   antelopeChainRegistry,
