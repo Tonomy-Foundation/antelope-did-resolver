@@ -10,14 +10,6 @@ The DID specification can be found at [antelope-did-registry](https://github.com
 
 ## Contributions
 
-The Antelope Identity Working Group is an open working group where we, the Antelope community, discuss identity on Antelope chains and progress work such as this DID specification and it's implementation. We have a weekly meeting and a Slack channel.
-
-**[Join the Antelope Identity Working Group](https://www.gimly.io/antelope-identity)**
-
-Comments regarding this document are welcome. Please file issues and PRs directly on Github. Contributors are recognized through adding commits to the code base.
-
-See [README.tsdx.md](./README.tsdx.md) for instructions on how to run, build, test and test this library.
-
 Contributors:
 
 - Jack Tanner <jack@gimly.io>
