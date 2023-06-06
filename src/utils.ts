@@ -1,5 +1,7 @@
 import BN from 'bn.js';
-import * as uint8arrays from 'uint8arrays';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { toString, fromString } from 'uint8arrays';
 import { PublicKey, PrivateKey, KeyType } from '@greymass/eosio';
 import elliptic from 'elliptic';
 
@@ -16,7 +18,7 @@ export function bnToBase64Url(bn: BN): string {
 
 // Copied from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
 function bytesToBase64(b: Uint8Array): string {
-  return uint8arrays.toString(b, 'base64pad');
+  return toString(b, 'base64pad');
 }
 
 // Adapted from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
@@ -28,7 +30,7 @@ function bigintToBytes(n: bigint): Uint8Array {
     b64 = `0${b64}`;
   }
 
-  return uint8arrays.fromString(b64, 'base16');
+  return fromString(b64, 'base16');
 }
 
 export function createJWK(publicKey: PublicKey) {
