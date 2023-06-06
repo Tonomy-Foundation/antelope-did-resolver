@@ -12,12 +12,12 @@ The DID specification can be found at [antelope-did-registry](https://github.com
 
 Contributors:
 
-- Jack Tanner <jack@gimly.io>
+- Jack Tanner | Tonomy Foundation
 - Jonas Walter
 - Sebastian Montero <sebastian@m1ghty.io>
 - Sana Rauf | Block One
 - Julius Rahaus
-- Rebal Alhaqash
+- Rebal Alhaqash | Tonomy Foundation
 
 <!-- Make sure images have 75 pixel height -->
 [![Gimly](./assets/gimly.jpg)](https://gimly.io)
