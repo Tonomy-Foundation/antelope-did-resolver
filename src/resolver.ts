@@ -1,7 +1,7 @@
 import { ParsedDID, DIDResolutionResult, DIDDocument, ServiceEndpoint, Resolvable } from 'did-resolver';
-import { APIError, PublicKey } from '@greymass/eosio';
-import { AccountObject } from '@greymass/eosio/src/api/v1/types';
-import { PermissionLevelWeight } from '@greymass/eosio/src/chain/authority';
+import { APIError, PublicKey } from '@wharfkit/antelope';
+import { AccountObject } from '@wharfkit/antelope/src/api/v1/types';
+import { PermissionLevelWeight } from '@wharfkit/antelope/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
 import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
@@ -93,7 +93,7 @@ async function createRpcFetchAccount(methodId: MethodId, service: any): Promise<
   const endpoint = service.serviceEndpoint;
 
   try {
-    // @ts-expect-error AccountObject is not assignable to @greymass/eosio AccountObject
+    // @ts-expect-error AccountObject is not assignable to @wharfkit/antelope AccountObject
     return await getApi(endpoint).v1.chain.get_account(methodId.subject);
   } catch (e) {
     if (e instanceof APIError && e.message.startsWith('Account not found at /v1/chain/get_account')) {
@@ -155,7 +155,7 @@ export function createDIDDocument(methodId: MethodId, did: string, antelopeAccou
     let method: VerificationMethod;
 
     if (permission.required_auth.keys.length === 1 && permission.required_auth.accounts.length === 0) {
-      // @ts-expect-error PublicKey is not assignable to @greymass/eosio PublicKey
+      // @ts-expect-error PublicKey is not assignable to @wharfkit/antelope PublicKey
       method = createKeyMethod(baseId, 0, did, permission.required_auth.keys[0].key);
       method.id = baseId;
     } else {
@@ -175,7 +175,7 @@ export function createDIDDocument(methodId: MethodId, did: string, antelopeAccou
 
       for (const key of permission.required_auth.keys) {
         method.conditionWeightedThreshold.push({
-          // @ts-expect-error PublicKey is not assignable to @greymass/eosio PublicKey
+          // @ts-expect-error PublicKey is not assignable to @wharfkit/antelope PublicKey
           condition: createKeyMethod(baseId, i, did, key.key),
           weight: key.weight.toNumber(),
         });

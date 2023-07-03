@@ -2,7 +2,7 @@ import BN from 'bn.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { toString, fromString } from 'uint8arrays';
-import { PublicKey, PrivateKey, KeyType } from '@greymass/eosio';
+import { PublicKey, PrivateKey, KeyType } from '@wharfkit/antelope';
 import elliptic from 'elliptic';
 
 const secp256k1 = new elliptic.ec('secp256k1');
