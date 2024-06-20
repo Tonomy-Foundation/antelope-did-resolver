@@ -1,6 +1,5 @@
 import { ResolverRegistry } from 'did-resolver';
 import {
-  resolve,
   antelopeChainRegistry,
   checkDID,
   fetchAccount,
@@ -12,11 +11,8 @@ import {
   createResolver,
 } from './resolver';
 
-export function getResolver(options?: {
-  antelopeChainUrl?: string;
-  fetch?: () => Promise<any>;
-}): ResolverRegistry {
-  return { eosio: resolve, antelope: createResolver(options) } as any;
+export function getResolver(options?: { antelopeChainUrl?: string; fetch?: () => Promise<any> }): ResolverRegistry {
+  return { eosio: createResolver(options), antelope: createResolver(options) } as any;
 }
 
 export {
