@@ -4181,7 +4181,15 @@ detect-newline@^3.0.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-did-jwt@^8.0.4:
+did-jwt-vc@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/did-jwt-vc/-/did-jwt-vc-4.0.4.tgz#05f6e29778dd5655cb11cb94a3d1ee8e3cd2f255"
+  integrity sha512-O/VSW+pux25+bERGQ1Z+LNv8z8gIy++yL8yjspxNZHCLjdmCelZz3hjuIpHlixhBCFP2YyTOQqGg8QeIMRwN9Q==
+  dependencies:
+    did-jwt "^8.0.0"
+    did-resolver "^4.1.0"
+
+did-jwt@^8.0.0, did-jwt@^8.0.4:
   version "8.0.4"
   resolved "https://registry.yarnpkg.com/did-jwt/-/did-jwt-8.0.4.tgz#f5fce5cfc3064dcede146c8547d335703756e353"
   integrity sha512-KPtG7H+8GgKGMiDqFvOdNy5BBN3hpA+8xV7VygEnpst5oPIqjvcH3rTtnPF55a8bOxIzE2PudKGIXIQhekv7WA==
