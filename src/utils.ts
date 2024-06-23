@@ -1,55 +1,27 @@
-import BN from 'bn.js';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { toString, fromString } from 'uint8arrays';
 import { PublicKey, PrivateKey, KeyType } from '@wharfkit/antelope';
-import elliptic from 'elliptic';
-
-const secp256k1 = new elliptic.ec('secp256k1');
-
-// Adapted from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
-export function bnToBase64Url(bn: BN): string {
-  const bnString = bn.toString();
-  const bi = BigInt(bnString);
-  const biBytes = bigintToBytes(bi);
-
-  return bytesToBase64(biBytes);
-}
-
-// Copied from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
-function bytesToBase64(b: Uint8Array): string {
-  return toString(b, 'base64pad');
-}
-
-// Adapted from https://github.com/decentralized-identity/did-jwt/blob/056b2e422896436b781ecab2b466bacf72708d23/src/util.ts
-function bigintToBytes(n: bigint): Uint8Array {
-  let b64 = n.toString(16);
-
-  // Pad an extra '0' if the hex string is an odd length
-  if (b64.length % 2 !== 0) {
-    b64 = `0${b64}`;
-  }
-
-  return fromString(b64, 'base16');
-}
+import { secp256k1 } from '@noble/curves/secp256k1'
+import { p256 } from '@noble/curves/p256'
+import { ProjPointType } from '@noble/curves/abstract/weierstrass';
+import { bigintToBytes } from '../node_modules/did-jwt/src/util';
+import { bytesToBase64url } from 'did-jwt';
 
 export function createJWK(publicKey: PublicKey) {
-  const ecPubKey = toElliptic(publicKey);
-
   const { jwkCurve } = getCurveNamesFromType(publicKey);
 
-  const publicKeyJwk = {
+  // copied from:
+  // secp256k1 - https://github.com/decentralized-identity/did-jwt/pull/280/files#diff-c94d78b633b2fe38397047def271342090b3c8d81adf022a3a745af6d7b1c845R197
+  // P-256 - https://github.com/decentralized-identity/did-jwt/pull/280/files#diff-c94d78b633b2fe38397047def271342090b3c8d81adf022a3a745af6d7b1c845R57
+  const publicKeyPoint = toNobel(publicKey);
+  return {
     crv: jwkCurve,
     kty: 'EC',
-    x: bnToBase64Url(ecPubKey.getPublic().getX() as any),
-    y: bnToBase64Url(ecPubKey.getPublic().getY() as any),
+    x: bytesToBase64url(bigintToBytes(publicKeyPoint.x)),
+    y: bytesToBase64url(bigintToBytes(publicKeyPoint.y)),
     kid: publicKey.toString(),
-  };
-
-  return publicKeyJwk;
+  }
 }
 
-export function getCurveNamesFromType(key: PublicKey): { jwkCurve: string; verificationMethodType: string } {
+export function getCurveNamesFromType(key: PublicKey): { jwkCurve: "secp256k1" | "P-256"; verificationMethodType: string } {
   const type = key.type;
 
   switch (type) {
@@ -62,27 +34,19 @@ export function getCurveNamesFromType(key: PublicKey): { jwkCurve: string; verif
       return { jwkCurve: 'P-256', verificationMethodType: 'JsonWebKey2020' };
     case KeyType.WA:
       return { jwkCurve: 'P-256', verificationMethodType: 'JsonWebKey2020' };
+    default:
+      throw new Error(`Unsupported key type: ${type}`);
   }
 }
 
-export function toElliptic(key: PrivateKey | PublicKey): elliptic.ec.KeyPair {
-  let ecKeyPair: elliptic.ec.KeyPair;
-
-  if (key instanceof PublicKey) {
-    ecKeyPair = secp256k1.keyFromPublic(key.data.array);
-  } else {
-    ecKeyPair = secp256k1.keyFromPrivate(key.data.array);
-  }
-
-  validateKey(ecKeyPair);
-
-  return ecKeyPair;
-}
-
-function validateKey(keyPair: elliptic.ec.KeyPair) {
-  const result = keyPair.validate();
-
-  if (!result.result) {
-    throw new Error(`Key not valid with reason ${result.reason}`);
+export function toNobel(key: PublicKey | PrivateKey): ProjPointType<bigint> {
+  const { jwkCurve } = getCurveNamesFromType(key instanceof PublicKey ? key : key.toPublic());
+  switch (jwkCurve) {
+    case 'secp256k1':
+      return secp256k1.ProjectivePoint.fromHex(key.data.array);
+    case 'P-256':
+      return p256.ProjectivePoint.fromHex(key.data.array);
+    default:
+      throw new Error(`Unsupported curve: ${jwkCurve}`);
   }
 }

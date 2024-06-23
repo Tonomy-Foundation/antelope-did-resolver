@@ -74,9 +74,10 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
+    "@noble/curves": "^1.4.0",
     "@wharfkit/antelope": "^1.0.7",
     "cross-fetch": "^4.0.0",
-    "did-resolver": "^4.1.0",
-    "uint8arrays": "5.1.0"
+    "did-jwt": "^8.0.4",
+    "did-resolver": "^4.1.0"
   }
 }
