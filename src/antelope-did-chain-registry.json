@@ -43,5 +43,15 @@
                 "serviceEndpoint": "https://api.xec.cryptolions.io"
             }
         ]
+    },
+    "pangea": {
+        "chainId": "66d565f72ac08f8321a3036e2d92eea7f96ddc90599bdbfc2d025d810c74c248",
+        "service": [
+            {
+                "id": "https://pangea.eosusa.io",
+                "type": "LinkedDomains",
+                "serviceEndpoint": "https://pangea.eosusa.io"
+            }
+        ]
     }
 }

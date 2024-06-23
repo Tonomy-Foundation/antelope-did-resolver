@@ -96,7 +96,7 @@ async function createRpcFetchAccount(methodId: MethodId, service: any): Promise<
     // @ts-expect-error AccountObject is not assignable to @wharfkit/antelope AccountObject
     return await getApi(endpoint).v1.chain.get_account(methodId.subject);
   } catch (e) {
-    if (e instanceof APIError && e.message.startsWith('Account not found at /v1/chain/get_account')) {
+    if (e instanceof APIError && e.message.startsWith('Account Query Exception at /v1/chain/get_account')) {
       return null;
     } else {
       throw e;

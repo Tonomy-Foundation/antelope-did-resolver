@@ -4,12 +4,13 @@
         "typescript"
     ],
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": "explicit",
     },
     "jest.autoRun": {
         "onSave": false,
         "onStartup": false
     },
+    "jest.jestCommandLine": "yarn run test",
     "jest.debugMode": false,
     "jest.testExplorer": {
         "enabled": true
