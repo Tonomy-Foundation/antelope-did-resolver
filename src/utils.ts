@@ -2,8 +2,13 @@ import { PublicKey, PrivateKey, KeyType } from '@wharfkit/antelope';
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { p256 } from '@noble/curves/p256'
 import { ProjPointType } from '@noble/curves/abstract/weierstrass';
-import { bigintToBytes } from '../node_modules/did-jwt/src/util';
-import { bytesToBase64url } from 'did-jwt';
+import { bytesToBase64url, hexToBytes } from 'did-jwt';
+
+// Cannot import the following, so copying here
+// import { bigintToBytes } from '../node_modules/did-jwt/src/util';
+function bigintToBytes(n: bigint, minLength?: number): Uint8Array {
+  return hexToBytes(n.toString(16), minLength)
+}
 
 export function createJWK(publicKey: PublicKey) {
   const { jwkCurve } = getCurveNamesFromType(publicKey);
