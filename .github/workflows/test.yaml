@@ -12,6 +12,6 @@ jobs:
       - name: Run lint and test
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
-      - run: yarn install
+          node-version: 20.9.0
+      - run: yarn install --immutable
       - run: yarn run test
