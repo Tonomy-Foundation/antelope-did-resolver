@@ -1,6 +1,5 @@
 import { Resolver } from 'did-resolver';
 import { getResolver } from '../src/index';
-import { testDids } from './testDids';
 import { jest } from '@jest/globals';
 import { Issuer, JwtCredentialPayload, createVerifiableCredentialJwt, verifyCredential } from 'did-jwt-vc'
 import { ES256KSigner, ES256Signer, Signer } from 'did-jwt';
