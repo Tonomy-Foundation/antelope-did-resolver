@@ -3,7 +3,7 @@ import { APIError, PublicKey } from '@wharfkit/antelope';
 import { AccountObject } from '@wharfkit/antelope/src/api/v1/types';
 import { PermissionLevelWeight } from '@wharfkit/antelope/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
-import { createJWK, getCurveNamesFromType, toPublicKeyHex } from './utils';
+import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
 import { getApi } from './api';
 
@@ -111,23 +111,13 @@ function findServices(service: Array<ServiceEndpoint>, type: string): Array<Serv
 function createKeyMethod(baseId: string, i: number, did: string, pubKey: PublicKey): VerificationMethod {
   const { verificationMethodType } = getCurveNamesFromType(pubKey);
 
-  if (verificationMethodType === 'JsonWebKey2020') {
-    return {
-      id: baseId + '-' + i,
-      controller: did,
-      type: verificationMethodType,
-      publicKeyJwk: createJWK(pubKey),
-    };
-  } else {
-    return {
-      id: baseId + '-' + i,
-      controller: did,
-      type: verificationMethodType,
-      // Could also use `publicKeyHex` but it is handy to have the kid property of the JWK for debugging
-      // publicKeyHex: toPublicKeyHex(pubKey),
-      publicKeyJwk: createJWK(pubKey),
-    };
-  }
+  return {
+    id: baseId + '-' + i,
+    controller: did,
+    type: verificationMethodType,
+    // NOTE: could also use `util.publicKeyHex(pubKey)` instead, but it is handy to have the kid property of the JWK for debugging
+    publicKeyJwk: createJWK(pubKey),
+  };
 }
 
 function createAccountMethod(
