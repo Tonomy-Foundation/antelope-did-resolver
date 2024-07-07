@@ -3,7 +3,7 @@ import { APIError, PublicKey } from '@wharfkit/antelope';
 import { AccountObject } from '@wharfkit/antelope/src/api/v1/types';
 import { PermissionLevelWeight } from '@wharfkit/antelope/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
-import { createJWK, getCurveNamesFromType } from './utils';
+import { createJWK, getCurveNamesFromType, toPublicKeyHex } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
 import { getApi } from './api';
 
@@ -108,20 +108,24 @@ function findServices(service: Array<ServiceEndpoint>, type: string): Array<Serv
   return service.filter((s: any) => (Array.isArray(s.type) ? s.type.includes(type) : s.type === type));
 }
 
-function createKeyMethod(baseId: string, i: number, did: string, key: PublicKey): VerificationMethod {
-  const pubKey = key;
-
-  const publicKeyJwk = createJWK(pubKey);
+function createKeyMethod(baseId: string, i: number, did: string, pubKey: PublicKey): VerificationMethod {
   const { verificationMethodType } = getCurveNamesFromType(pubKey);
 
-  const keyMethod: VerificationMethod = {
-    id: baseId + '-' + i,
-    controller: did,
-    type: verificationMethodType,
-    publicKeyJwk,
-  };
-
-  return keyMethod;
+  if (verificationMethodType === 'JsonWebKey2020') {
+    return {
+      id: baseId + '-' + i,
+      controller: did,
+      type: verificationMethodType,
+      publicKeyJwk: createJWK(pubKey),
+    };
+  } else {
+    return {
+      id: baseId + '-' + i,
+      controller: did,
+      type: verificationMethodType,
+      publicKeyHex: toPublicKeyHex(pubKey),
+    };
+  }
 }
 
 function createAccountMethod(

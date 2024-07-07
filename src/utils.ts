@@ -2,7 +2,7 @@ import { PublicKey, KeyType, PrivateKey } from '@wharfkit/antelope';
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { p256 } from '@noble/curves/p256'
 import { ProjPointType } from '@noble/curves/abstract/weierstrass';
-import { bytesToBase64url, ES256KSigner, ES256Signer, hexToBytes, Signer } from 'did-jwt';
+import { bytesToBase64url, bytesToHex, ES256KSigner, ES256Signer, hexToBytes, Signer } from 'did-jwt';
 import { Issuer } from 'did-jwt-vc';
 
 export function createSigner(privateKey: PrivateKey): Signer {
@@ -23,6 +23,10 @@ export function createIssuer(did: string, privateKey: PrivateKey): Issuer {
     signer: createSigner(privateKey),
     alg: privateKey.type === KeyType.K1 ? 'ES256K' : 'ES256',
   }
+}
+
+export function toPublicKeyHex(publicKey: PublicKey): string {
+  return bytesToHex(publicKey.data.array);
 }
 
 // Cannot import the following, so copying here
