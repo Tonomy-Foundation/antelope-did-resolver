@@ -9,6 +9,7 @@ const config = {
             {
                 useESM: true,
                 tsconfig: './tsconfig.json',
+                diagnostics: process.env.CI ? true : false
             },
         ],
     },

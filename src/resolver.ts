@@ -108,20 +108,16 @@ function findServices(service: Array<ServiceEndpoint>, type: string): Array<Serv
   return service.filter((s: any) => (Array.isArray(s.type) ? s.type.includes(type) : s.type === type));
 }
 
-function createKeyMethod(baseId: string, i: number, did: string, key: PublicKey): VerificationMethod {
-  const pubKey = key;
-
-  const publicKeyJwk = createJWK(pubKey);
+function createKeyMethod(baseId: string, i: number, did: string, pubKey: PublicKey): VerificationMethod {
   const { verificationMethodType } = getCurveNamesFromType(pubKey);
 
-  const keyMethod: VerificationMethod = {
+  return {
     id: baseId + '-' + i,
     controller: did,
     type: verificationMethodType,
-    publicKeyJwk,
+    // NOTE: could also use `util.publicKeyHex(pubKey)` instead, but it is handy to have the kid property of the JWK for debugging
+    publicKeyJwk: createJWK(pubKey),
   };
-
-  return keyMethod;
 }
 
 function createAccountMethod(
