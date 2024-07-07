@@ -1,32 +1,10 @@
 import { Resolver } from 'did-resolver';
-import { getResolver } from '../src/index';
+import { createIssuer, getResolver } from '../src/index';
 import { jest } from '@jest/globals';
-import { Issuer, JwtCredentialPayload, createVerifiableCredentialJwt, verifyCredential } from 'did-jwt-vc'
-import { ES256KSigner, ES256Signer, Signer } from 'did-jwt';
-import { KeyType, PrivateKey } from '@wharfkit/antelope';
+import { JwtCredentialPayload, createVerifiableCredentialJwt, verifyCredential } from 'did-jwt-vc'
+import { PrivateKey } from '@wharfkit/antelope';
 
 jest.setTimeout(10000);
-
-function createSigner(privateKey: PrivateKey): Signer {
-    if (privateKey.type === KeyType.K1) {
-        return ES256KSigner(privateKey.data.array, true);
-    }
-
-    if (privateKey.type === KeyType.R1 || privateKey.type === KeyType.WA) {
-        return ES256Signer(privateKey.data.array);
-    }
-
-    throw new Error('Unsupported key type');
-}
-
-function createIssuer(did: string, privateKey: PrivateKey): Issuer {
-    return {
-        did,
-        signer: createSigner(privateKey),
-        alg: 'ES256K-R',
-    }
-}
-
 
 describe('VC tests', () => {
     const resolver = new Resolver(getResolver());

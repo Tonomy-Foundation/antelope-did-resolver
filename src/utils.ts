@@ -1,8 +1,29 @@
-import { PublicKey, KeyType } from '@wharfkit/antelope';
+import { PublicKey, KeyType, PrivateKey } from '@wharfkit/antelope';
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { p256 } from '@noble/curves/p256'
 import { ProjPointType } from '@noble/curves/abstract/weierstrass';
-import { bytesToBase64url, hexToBytes } from 'did-jwt';
+import { bytesToBase64url, ES256KSigner, ES256Signer, hexToBytes, Signer } from 'did-jwt';
+import { Issuer } from 'did-jwt-vc';
+
+export function createSigner(privateKey: PrivateKey): Signer {
+  if (privateKey.type === KeyType.K1) {
+    return ES256KSigner(privateKey.data.array);
+  }
+
+  if (privateKey.type === KeyType.R1 || privateKey.type === KeyType.WA) {
+    return ES256Signer(privateKey.data.array);
+  }
+
+  throw new Error('Unsupported key type');
+}
+
+export function createIssuer(did: string, privateKey: PrivateKey): Issuer {
+  return {
+    did,
+    signer: createSigner(privateKey),
+    alg: privateKey.type === KeyType.K1 ? 'ES256K' : 'ES256',
+  }
+}
 
 // Cannot import the following, so copying here
 // import { bigintToBytes } from '../node_modules/did-jwt/src/util';

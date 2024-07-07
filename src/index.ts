@@ -12,7 +12,9 @@ export {
   CONDITIONAL_PROOF_2022,
   createDIDDocument,
 } from './resolver';
+
 export * from './utils';
+
 export function getResolver(options?: { antelopeChainUrl?: string; fetch?: () => Promise<any> }): ResolverRegistry {
   return { eosio: createResolver(options), antelope: createResolver(options) } as any;
 }
