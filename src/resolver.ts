@@ -123,7 +123,9 @@ function createKeyMethod(baseId: string, i: number, did: string, pubKey: PublicK
       id: baseId + '-' + i,
       controller: did,
       type: verificationMethodType,
-      publicKeyHex: toPublicKeyHex(pubKey),
+      // Could also use `publicKeyHex` but it is handy to have the kid property of the JWK for debugging
+      // publicKeyHex: toPublicKeyHex(pubKey),
+      publicKeyJwk: createJWK(pubKey),
     };
   }
 }
