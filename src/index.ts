@@ -2,6 +2,7 @@ import { ResolverRegistry } from 'did-resolver';
 import {
   createResolver,
 } from './resolver';
+import { AntelopeDIDResolutionOptions } from './types';
 export {
   antelopeChainRegistry,
   checkDID,
@@ -15,6 +16,6 @@ export {
 
 export * from './utils';
 
-export function getResolver(options?: { antelopeChainUrl?: string; fetch?: () => Promise<any> }): ResolverRegistry {
+export function getResolver(options?: AntelopeDIDResolutionOptions): ResolverRegistry {
   return { eosio: createResolver(options), antelope: createResolver(options) } as any;
 }
