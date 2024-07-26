@@ -29,10 +29,13 @@ interface Entry {
   service: Service[];
 }
 
+
+type FetchType = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+
 export interface AntelopeDIDResolutionOptions extends DIDResolutionOptions {
-  fetch?: any;
-  antelopeChainRegistry: Registry;
   antelopeChainUrl?: string;
+  fetch?: FetchType;
+  antelopeChainRegistry?: Registry;
 }
 
 export interface Registry {

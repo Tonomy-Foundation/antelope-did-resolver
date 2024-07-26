@@ -5,7 +5,7 @@ import { PermissionLevelWeight } from '@wharfkit/antelope/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
 import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
-import { getApi } from './api';
+import { GetApiOptions, getApi } from './api';
 
 const PATTERN_ACCOUNT_NAME = `([a-z1-5.]{0,12}[a-z1-5])`;
 const PATTERN_CHAIN_ID = `([A-Fa-f0-9]{64})`;
@@ -76,25 +76,28 @@ export async function fetchAccount(
 
   if (options.antelopeChainUrl) {
     return await createRpcFetchAccount(methodId, {
-      serviceEndpoint: options.antelopeChainUrl,
+      url: options.antelopeChainUrl,
+      fetch: options.fetch,
     });
   }
 
   const services = findServices(methodId.chain.service, serviceType);
 
   for (const service of services as any) {
-    return await createRpcFetchAccount(methodId, service);
+    return await createRpcFetchAccount(methodId, {
+      url: service.serviceEndpoint,
+      fetch: options.fetch
+    });
   }
 
   return null;
 }
 
-async function createRpcFetchAccount(methodId: MethodId, service: any): Promise<AccountObject | null> {
-  const endpoint = service.serviceEndpoint;
 
+async function createRpcFetchAccount(methodId: MethodId, options: GetApiOptions): Promise<AccountObject | null> {
   try {
     // @ts-expect-error AccountObject is not assignable to @wharfkit/antelope AccountObject
-    return await getApi(endpoint).v1.chain.get_account(methodId.subject);
+    return await getApi(options).v1.chain.get_account(methodId.subject);
   } catch (e) {
     if (e instanceof APIError && e.message.startsWith('Account Query Exception at /v1/chain/get_account')) {
       return null;
@@ -249,7 +252,7 @@ export async function resolve(
   };
 }
 
-export function createResolver(options: { antelopeChainUrl?: string } = {}): any {
+export function createResolver(options: AntelopeDIDResolutionOptions = {}): any {
   return function (
     did: string,
     parsed: ParsedDID,
