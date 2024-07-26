@@ -80,5 +80,6 @@
     "cross-fetch": "^4.0.0",
     "did-jwt": "^8.0.4",
     "did-resolver": "^4.1.0"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
