@@ -5,7 +5,7 @@ import { PermissionLevelWeight } from '@wharfkit/antelope/src/chain/authority';
 import { Entry, Registry, MethodId, VerificationMethod, AntelopeDIDResolutionOptions } from './types';
 import { createJWK, getCurveNamesFromType } from './utils';
 import antelopeChainRegistry from './antelope-did-chain-registry.json';
-import { APIClientOptions, getApi } from './api';
+import { GetApiOptions, getApi } from './api';
 
 const PATTERN_ACCOUNT_NAME = `([a-z1-5.]{0,12}[a-z1-5])`;
 const PATTERN_CHAIN_ID = `([A-Fa-f0-9]{64})`;
@@ -94,7 +94,7 @@ export async function fetchAccount(
 }
 
 
-async function createRpcFetchAccount(methodId: MethodId, options: APIClientOptions): Promise<AccountObject | null> {
+async function createRpcFetchAccount(methodId: MethodId, options: GetApiOptions): Promise<AccountObject | null> {
   try {
     // @ts-expect-error AccountObject is not assignable to @wharfkit/antelope AccountObject
     return await getApi(options).v1.chain.get_account(methodId.subject);
