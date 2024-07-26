@@ -9,8 +9,9 @@ import { Issuer } from 'did-jwt-vc';
  * Create a Antelope DID string
  * 
  * @param account {NameType} the account name e.g. "myaccount"
- * @param chain {string} the chain name (e.g. "telos" or "eos:testnet:jungle") or chain id (e.g. "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840")
+ * @param chain {string} the chain name or chain id
  * @returns {string} the Antelope DID string
+ * 
  * @example createDid("myaccount", "telos") // returns "did:antelope:telos:myaccount"
  * @example createDid("myaccount", "eos:testnet:jungle") // returns "did:antelope:eos:testnet:jungle:myaccount"
  * @example createDid("myaccount", "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840") // returns "did:antelope:2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840:myaccount"

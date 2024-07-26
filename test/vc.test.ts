@@ -1,5 +1,5 @@
 import { Resolver } from 'did-resolver';
-import { createIssuer, getResolver } from '../src/index';
+import { createDid, createIssuer, getResolver } from '../src/index';
 import { jest } from '@jest/globals';
 import { JwtCredentialPayload, createVerifiableCredentialJwt, verifyCredential } from 'did-jwt-vc'
 import { PrivateKey } from '@wharfkit/antelope';
@@ -10,7 +10,7 @@ describe('VC tests', () => {
     const resolver = new Resolver(getResolver());
     const accountName = "mytest123tes";
     const privateKey = PrivateKey.from("PVT_K1_2Yn362S23hWaDuDjLawDB1ZByF8fqsZZXFUDPTHnk6tXX44D2R");
-    const did = `did:antelope:eos:testnet:jungle:${accountName}`;
+    const did = createDid(accountName, "eos:testnet:jungle");
     const issuer = createIssuer(did, privateKey);
 
     it('create and verify VC', async () => {
