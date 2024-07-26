@@ -1,9 +1,23 @@
-import { PublicKey, KeyType, PrivateKey } from '@wharfkit/antelope';
+import { PublicKey, KeyType, PrivateKey, NameType } from '@wharfkit/antelope';
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { p256 } from '@noble/curves/p256'
 import { ProjPointType } from '@noble/curves/abstract/weierstrass';
 import { bytesToBase64url, bytesToHex, ES256KSigner, ES256Signer, hexToBytes, Signer } from 'did-jwt';
 import { Issuer } from 'did-jwt-vc';
+
+/**
+ * Create a Antelope DID string
+ * 
+ * @param account {NameType} the account name e.g. "myaccount"
+ * @param chain {string} the chain name (e.g. "telos" or "eos:testnet:jungle") or chain id (e.g. "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840")
+ * @returns {string} the Antelope DID string
+ * @example createDid("myaccount", "telos") // returns "did:antelope:telos:myaccount"
+ * @example createDid("myaccount", "eos:testnet:jungle") // returns "did:antelope:eos:testnet:jungle:myaccount"
+ * @example createDid("myaccount", "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840") // returns "did:antelope:2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840:myaccount"
+ */
+export function createDid(account: NameType, chain: string): string {
+  return `did:antelope:${chain}:${account.toString()}`;
+}
 
 export function createSigner(privateKey: PrivateKey): Signer {
   if (privateKey.type === KeyType.K1) {
@@ -41,7 +55,6 @@ export interface JWK {
   x: string;
   y: string;
   kid: string;
-
 }
 
 export function createJWK(publicKey: PublicKey): JWK {
